@@ -1,0 +1,13 @@
+version: '2'
+services:
+    insecureapp-postgresql:
+        container_name: insecureapp-postgresql
+        image: postgres:9.5.4
+        # volumes:
+        #     - my_path/postgresql/:/var/lib/postgresql/
+        environment:
+            - POSTGRES_DB=insecureapp
+            - POSTGRES_USER=postgres-user
+            - POSTGRES_PASSWORD=
+        ports:
+            - 5432:5432
