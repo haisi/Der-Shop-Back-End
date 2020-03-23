@@ -1,0 +1,12 @@
+= Der Shop Spring Boot Back End
+
+I use this project to try out DDD in Spring Boot.
+Furthermore, I use this as a refresh exercise for my Back End knowledge.
+
+.Subjects
+* [ ] DDD
+* [ ] JPA / Hibernate
+* [ ] Spring Data
+* [ ] Spring MVC
+* [ ] Spring MVC HATEOS
+* [ ] Spring Rest Docs
