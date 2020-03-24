@@ -42,16 +42,12 @@ class ProductControllerTest {
     @BeforeEach
     public void setUp(RestDocumentationContextProvider restDocumentation) {
 
-        RestDocumentationResultHandler documentationHandler = document(
-            "{method-name}",
-            preprocessRequest(prettyPrint()),
-            preprocessResponse(prettyPrint())
-                                                                      );
-
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
                                       .apply(documentationConfiguration(restDocumentation)
-                                          .operationPreprocessors().withResponseDefaults(prettyPrint()))
-                                      .alwaysDo(documentationHandler)
+                                          .operationPreprocessors()
+                                            .withRequestDefaults(prettyPrint(), removeHeaders("Host", "Content-Length"))
+                                            .withResponseDefaults(prettyPrint(), removeHeaders("Content-Length")))
+                                      .alwaysDo(document("{method-name}"))
                                       .build();
     }
 
