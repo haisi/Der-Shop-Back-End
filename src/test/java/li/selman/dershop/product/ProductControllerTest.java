@@ -24,8 +24,7 @@ import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.docu
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * @author Hasan Selman Kara
@@ -71,7 +70,7 @@ class ProductControllerTest {
         // then
         result
             .andExpect(status().isOk())
-            .andExpect(content().string(containsString("Product A")))
+            .andExpect(jsonPath("$..productList[0].name").value("Product A"))
             .andDo(document("sample", responseFields(productDescriptor)));
     }
 
