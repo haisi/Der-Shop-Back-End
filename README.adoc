@@ -10,3 +10,11 @@ Furthermore, I use this as a refresh exercise for my Back End knowledge.
 * [ ] Spring MVC
 * [ ] Spring MVC HATEOS
 * [ ] Spring Rest Docs
+
+== Build
+
+//TODO
+
+== Docs
+
+The REST documentation is available at http://localhost:8080/docs/index.html
