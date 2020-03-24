@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
+import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -20,6 +21,8 @@ import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -60,6 +63,8 @@ class ProductControllerTest {
             new Product(3L, "Product C")
         ));
 
+        FieldDescriptor[] productDescriptor = getProductFieldDescriptor();
+
         // when
         ResultActions result = this.mockMvc.perform(get("/product"));
 
@@ -67,7 +72,16 @@ class ProductControllerTest {
         result
             .andExpect(status().isOk())
             .andExpect(content().string(containsString("Product A")))
-            .andDo(document("sample"));
+            .andDo(document("sample", responseFields(productDescriptor)));
     }
 
+    private FieldDescriptor[] getProductFieldDescriptor() {
+        return new FieldDescriptor[]{
+//            subsectionWithPath("_embedded").ignored(),
+            fieldWithPath("_embedded").ignored(),
+            fieldWithPath("_embedded.productList").ignored(),
+            fieldWithPath("_embedded.productList[].id").description("The unique id of the product entity").type(Long.class.getSimpleName()),
+            fieldWithPath("_embedded.productList[].name").description("The name of the product").type(String.class.getSimpleName())
+        };
+    }
 }
