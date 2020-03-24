@@ -46,8 +46,9 @@ test {
 
 asciidoctor {
 	inputs.dir snippetsDir
-    attributes \
-        'snippets': snippetsDir
+    attributes = [
+        snippets: snippetsDir
+    ]
 	dependsOn test
 }
 
