@@ -1,5 +1,6 @@
 package li.selman.dershop.product;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,14 +18,16 @@ import org.springframework.web.context.WebApplicationContext;
 
 import java.util.List;
 
-import static org.hamcrest.Matchers.containsString;
 import static org.mockito.Mockito.when;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.documentationConfiguration;
-import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.prettyPrint;
+import static org.springframework.restdocs.operation.preprocess.Preprocessors.removeHeaders;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.responseFields;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
  * @author Hasan Selman Kara
@@ -36,6 +39,12 @@ class ProductControllerTest {
     @Autowired
     private WebApplicationContext context;
 
+    /*
+    objectMapper.writeValueAsString(someObj) for posting stuff
+     */
+    @Autowired
+    private ObjectMapper objectMapper;
+
     private MockMvc mockMvc;
 
     @MockBean
@@ -44,13 +53,15 @@ class ProductControllerTest {
     @BeforeEach
     public void setUp(RestDocumentationContextProvider restDocumentation) {
 
+        // @formatter:off
         this.mockMvc = MockMvcBuilders.webAppContextSetup(context)
-                                      .apply(documentationConfiguration(restDocumentation)
-                                          .operationPreprocessors()
-                                            .withRequestDefaults(prettyPrint(), removeHeaders("Host", "Content-Length"))
-                                            .withResponseDefaults(prettyPrint(), removeHeaders("Content-Length")))
-                                      .alwaysDo(document("{method-name}"))
-                                      .build();
+            .apply(documentationConfiguration(restDocumentation)
+                .operationPreprocessors()
+                    .withRequestDefaults(prettyPrint(), removeHeaders("Host", "Content-Length"))
+                    .withResponseDefaults(prettyPrint(), removeHeaders("Content-Length")))
+            .alwaysDo(document("{method-name}"))
+            .build();
+        // @formatter:on
     }
 
     @Test
