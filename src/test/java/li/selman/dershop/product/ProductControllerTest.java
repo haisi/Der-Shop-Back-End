@@ -82,7 +82,7 @@ class ProductControllerTest {
         result
             .andExpect(status().isOk())
             .andExpect(jsonPath("$..productList[0].name").value("Product A"))
-            .andDo(document("sample", responseFields(productDescriptor)));
+            .andDo(document("products-findAll", responseFields(productDescriptor)));
     }
 
     private FieldDescriptor[] getProductFieldDescriptor() {
