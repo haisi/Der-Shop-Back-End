@@ -19,6 +19,11 @@ public class Product {
     // Why JPA
     protected Product() {}
 
+    Product(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public Product(String name) {
         this.name = name;
     }
