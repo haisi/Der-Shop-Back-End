@@ -1,10 +1,11 @@
 package li.selman.dershop.product;
 
-import org.springframework.hateoas.*;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.UriTemplate;
 import org.springframework.hateoas.server.RepresentationModelProcessor;
 import org.springframework.stereotype.Component;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -27,8 +28,7 @@ public class ProductResourceProcessor implements RepresentationModelProcessor<En
 
     String geProductImageUrl(Product product) {
         UriTemplate template = UriTemplate.of("http:www.s3.amazon.com/product-image/{id}");
-        Map<String, String> uriVariables = new HashMap<>();
-        uriVariables.put("id", product.getId().toString());
+        var uriVariables = Map.entry("id", product.getId().toString());
         return template.expand(uriVariables).toString();
     }
 }
