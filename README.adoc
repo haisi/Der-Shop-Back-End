@@ -11,12 +11,25 @@ Furthermore, I use this as a refresh exercise for my Back End knowledge.
 * [ ] Spring Data
 * [ ] Spring MVC
 * [ ] Spring MVC HATEOS
-* [ ] Spring Rest Docs
+* [x] Spring Rest Docs
 
 == Build
 
-//TODO
+[source,bash]
+----
+./gradlew build
+java -jar build/libs/*.jar
+----
 
 == Docs
 
-The REST documentation is available at http://localhost:8080/docs/index.html
+The REST documentation is available at https://selman.li/Der-Shop-Back-End/
+
+If you build and run the project locally by
+
+[source,bash]
+----
+./gradlew build
+java -jar build/libs/*.jar
+----
+Visit: http://localhost:8888/docs/index.html
