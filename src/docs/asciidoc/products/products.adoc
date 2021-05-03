@@ -16,4 +16,4 @@ include::{snippets}/products-findAll/http-response.adoc[]
 
 .Output fields
 
-include::{snippets}/products-find-all/response-fields.adoc[]
+//include::{snippets}/products-find-all/response-fields.adoc[]

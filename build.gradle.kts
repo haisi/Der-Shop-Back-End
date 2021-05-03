@@ -61,6 +61,8 @@ tasks.withType<Javadoc>().configureEach {
 tasks.asciidoctor {
     inputs.dir(snippetsDir)
     dependsOn(tasks.test)
+    // Define variable "snippets" to access the generated docs from /src/docs/asciidoc
+    attributes(mapOf("snippets" to "${project.buildDir}/generated-snippets"))
 }
 
 // So we can access the docs from http://URL/docs/index.html when we build the jar.

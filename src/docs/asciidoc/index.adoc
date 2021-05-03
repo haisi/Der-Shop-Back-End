@@ -6,4 +6,11 @@ Hasan Selman Kara;
 
 TBD General info about the API
 
-include::products/products.adoc[]
+include::{snippets}/products-findAll/curl-request.adoc[]
+include::{snippets}/products-findAll/response-fields.adoc[]
+include::{snippets}/products-findAll/request-body.adoc[]
+include::{snippets}/products-findAll/response-body.adoc[]
+
+test
+
+operation::products-findAll[snippets='response-fields,http-response']
