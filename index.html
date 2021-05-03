@@ -5,7 +5,8 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.6.1">
-<title>Product</title>
+<meta name="author" content="Hasan Selman Kara">
+<title>DerShop REST-API Docs</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -424,36 +425,60 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
-<body class="article">
+<body class="book">
 <div id="header">
+<h1>DerShop REST-API Docs</h1>
+<div class="details">
+<span id="author" class="author">Hasan Selman Kara</span><br>
+</div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_product">Product</h2>
+<div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>TBD</p>
+<p>TBD General info about the API</p>
 </div>
 <div class="listingblock">
-<div class="title">cURL command:</div>
 <div class="content">
-<pre class="highlight"><code class="language-bash" data-lang="bash">$ curl 'http://localhost:8080/product' -i -X GET</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash hljs" data-lang="bash">$ curl 'http://localhost:8080/product' -i -X GET</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all spread">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Path</th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>_embedded.productList[].id</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Long</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The unique id of the product entity</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>_embedded.productList[].name</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the product</p></td>
+</tr>
+</tbody>
+</table>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight nowrap"><code></code></pre>
 </div>
 </div>
 <div class="listingblock">
-<div class="title">HTTP request:</div>
 <div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">GET /product HTTP/1.1</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="title">HTTP response:</div>
-<div class="content">
-<pre class="highlight nowrap"><code class="language-http" data-lang="http">HTTP/1.1 200 OK
-Content-Type: application/hal+json
-
-{
+<pre class="highlightjs highlight nowrap"><code>{
   "_embedded" : {
     "productList" : [ {
       "id" : 1,
@@ -469,13 +494,22 @@ Content-Type: application/hal+json
 }</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>test</p>
+</div>
+<div class="paragraph">
+<p>operation::products-findAll[snippets='response-fields,http-response']</p>
+</div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2021-05-03 21:07:03 UTC
+Last updated 2021-05-03 21:18:27 UTC
 </div>
 </div>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
 </body>
 </html>
