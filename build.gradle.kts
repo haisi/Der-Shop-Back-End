@@ -1,4 +1,5 @@
 import net.ltgt.gradle.errorprone.errorprone
+import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 plugins {
     id("org.springframework.boot") version "2.4.5"
@@ -60,4 +61,15 @@ tasks.withType<Javadoc>().configureEach {
 tasks.asciidoctor {
     inputs.dir(snippetsDir)
     dependsOn(tasks.test)
+}
+
+// So we can access the docs from http://URL/docs/index.html when we build the jar.
+// $ ./gradlew build
+// $ java -jar build/libs/*.jar
+// Visit: http://localhost:8888/docs/index.html
+tasks.named<BootJar>("bootJar") {
+    dependsOn(tasks.asciidoctor)
+    from("${buildDir.name}/asciidoc/html5") {
+        into("static/docs")
+    }
 }
