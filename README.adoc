@@ -1,5 +1,7 @@
 = Der Shop Spring Boot Back End
 
+image::https://github.com/haisi/Der-Shop-Back-End/actions/workflows/gradle.yml/badge.svg[CI-State]
+
 I use this project to try out DDD in Spring Boot.
 Furthermore, I use this as a refresh exercise for my Back End knowledge.
 
