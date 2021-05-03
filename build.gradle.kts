@@ -1,8 +1,12 @@
+import net.ltgt.gradle.errorprone.errorprone
+
 plugins {
     id("org.springframework.boot") version "2.4.5"
     id("io.spring.dependency-management") version "1.0.11.RELEASE"
     id("org.asciidoctor.convert") version "1.5.8"
 	id("java")
+    jacoco
+    id("com.palantir.baseline") version "3.69.0"
 }
 
 group = "li.selman"
@@ -35,6 +39,22 @@ tasks.withType<Test> {
 
 tasks.test {
     outputs.dir(snippetsDir)
+}
+
+// Disable error prone for test-sources
+tasks.named<JavaCompile>("compileTestJava") {
+    options.errorprone.isEnabled.set(false)
+}
+
+tasks.withType<JavaCompile>().configureEach {
+    options.errorprone.disable("BracesRequired", "MissingSummary", "EqualsGetClass", "OptionalOrElseMethodInvocation",
+        "PreferSafeLoggableExceptions", "PreferSafeLoggingPreconditions", "Slf4jConstantLogMessage",
+        "StrictUnusedVariable" // Re-enable in the future
+    )
+}
+
+tasks.withType<Javadoc>().configureEach {
+    options.encoding = "UTF-8"
 }
 
 tasks.asciidoctor {
