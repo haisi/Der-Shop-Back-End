@@ -42,5 +42,5 @@ jobs:
                 GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               with:
                 email: hasan.selman.kara@gmai.com
-                build_dir: build/asciidoc
+                build_dir: build/asciidoc/html5
                 jekyll: no
