@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="8.40">
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/DerShopApplication.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/product/Product.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/product/ProductController.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/product/ProductRepository.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/product/ProductResourceProcessor.java">
+</file>
+</checkstyle>
