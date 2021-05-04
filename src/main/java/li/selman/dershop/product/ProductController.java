@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @ExposesResourceFor(Product.class)
-@RequestMapping("/product")
+@RequestMapping("/products")
 public class ProductController {
 
     private final ProductRepository productRepo;
