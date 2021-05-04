@@ -21,6 +21,11 @@ Furthermore, I use this as a refresh exercise for my Back End knowledge.
 java -jar build/libs/*.jar
 ----
 
+== Monitoring
+
+http://localhost:8888/actuator/prometheus
+TBD
+
 == Docs
 
 The REST documentation is available at https://selman.li/Der-Shop-Back-End/
