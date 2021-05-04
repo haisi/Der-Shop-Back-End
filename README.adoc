@@ -23,7 +23,15 @@ java -jar build/libs/*.jar
 
 == Monitoring
 
-http://localhost:8888/actuator/prometheus
+Metrics exposed by the Spring-Boot app: http://localhost:8888/actuator/prometheus
+
+[source,bash]
+----
+docker-compose -f src/main/docker/monitoring.yml up -d
+----
+
+Prometheus: http://localhost:9090/
+Grafana: http://localhost:3000/ (admin;admin)
 TBD
 
 == Docs
