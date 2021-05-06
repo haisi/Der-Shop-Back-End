@@ -90,7 +90,7 @@ class ProductControllerTest {
         FieldDescriptor[] productDescriptor = getProductFieldDescriptor();
 
         // when
-        ResultActions result = this.mockMvc.perform(get("/products"));
+        ResultActions result = this.mockMvc.perform(get("/api/products"));
 
         // then
         result
