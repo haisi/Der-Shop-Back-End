@@ -1,17 +1,21 @@
-= Der Shop Spring Boot Back End
+= DerShop Spring-Boot backend
 
 image::https://github.com/haisi/Der-Shop-Back-End/actions/workflows/gradle.yml/badge.svg[CI-State]
 
-I use this project to try out DDD in Spring Boot.
-Furthermore, I use this as a refresh exercise for my Back End knowledge.
+This is a (work in progress) e-commerce system for a fictitious company called "DerShop".
+I use this project to try out and keep track of the latest and greatest tools and tricks to build Spring Boot applications.
 
-.Subjects
+.Subjects Covered
 * [ ] DDD
-* [ ] JPA / Hibernate
-* [ ] Spring Data
-* [ ] Spring MVC
-* [ ] Spring MVC HATEOS
+* [x] JPA / Hibernate
+* [x] Spring Data
+* [ ] Liquibase
+* [x] Spring MVC
+* [x] Spring MVC HATEOS
+* [x] Spring Security with JWT
 * [x] Spring Rest Docs
+* [x] Actuator / Prometheus
+* [x] Lombok
 
 == Build
 
@@ -20,19 +24,6 @@ Furthermore, I use this as a refresh exercise for my Back End knowledge.
 ./gradlew build
 java -jar build/libs/*.jar
 ----
-
-== Monitoring
-
-Metrics exposed by the Spring-Boot app: http://localhost:8888/actuator/prometheus
-
-[source,bash]
-----
-docker-compose -f src/main/docker/monitoring.yml up -d
-----
-
-Prometheus: http://localhost:9090/
-Grafana: http://localhost:3000/ (admin;admin)
-TBD
 
 == Docs
 
@@ -46,3 +37,16 @@ If you build and run the project locally by
 java -jar build/libs/*.jar
 ----
 Visit: http://localhost:8888/docs/index.html
+
+== Monitoring
+
+Metrics exposed by the Spring-Boot app: http://localhost:8888/actuator/prometheus
+
+[source,bash]
+----
+docker-compose -f src/main/docker/monitoring.yml up -d
+----
+
+Prometheus: http://localhost:9090/
+Grafana: http://localhost:3000/ (admin;admin)
+TBD
