@@ -47,6 +47,7 @@ dependencies {
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
+    implementation("org.jetbrains:annotations:20.1.0")
 
     // Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -72,6 +73,16 @@ tasks.withType<JavaCompile>().configureEach {
         "PreferSafeLoggableExceptions", "PreferSafeLoggingPreconditions", "Slf4jConstantLogMessage",
         "StrictUnusedVariable" // Re-enable in the future
     )
+}
+
+spotless {
+    java {
+        target(fileTree("src/**/*.java") {
+            exclude(
+                "**/li/selman/dershop/app/security/RandomStringUtils.java",
+                "**/li/selman/dershop/app/security/RandomUtil.java")
+        })
+    }
 }
 
 tasks.withType<Javadoc>().configureEach {
