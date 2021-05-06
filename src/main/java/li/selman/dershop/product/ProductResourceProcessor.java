@@ -16,7 +16,6 @@
 package li.selman.dershop.product;
 
 import java.util.Map;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.UriTemplate;
@@ -31,7 +30,6 @@ public class ProductResourceProcessor implements RepresentationModelProcessor<En
 
     public static final String IMAGE_REL = "image";
 
-    @NotNull
     @Override
     public EntityModel<Product> process(EntityModel<Product> resource) {
         if (resource.getContent() == null) {
