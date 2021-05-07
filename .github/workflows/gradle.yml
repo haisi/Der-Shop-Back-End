@@ -15,7 +15,7 @@ jobs:
                 env:
                     POSTGRES_DB: dershop
                     POSTGRES_USER: dershop-user
-                    POSTGRES_PASSWORD: ~
+                    POSTGRES_PASSWORD: postgres-pw
                     POSTGRES_HOST_AUTH_METHOD: trust
                 # Set health checks to wait until postgres has started
                 options: >-
