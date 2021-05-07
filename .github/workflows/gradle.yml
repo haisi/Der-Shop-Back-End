@@ -3,9 +3,7 @@ name: gradle-build
 on: push
 
 jobs:
-    # Label of the container job
-    container-job:
-        # Containers must run in Linux based operating systems
+    build:
         runs-on: ubuntu-latest
         # Service containers to run with `container-job`
         services:
@@ -25,8 +23,6 @@ jobs:
                     --health-interval 10s
                     --health-timeout 5s
                     --health-retries 5
-    build:
-        runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
             - name: Update apt
