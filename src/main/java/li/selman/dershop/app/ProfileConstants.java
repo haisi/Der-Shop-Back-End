@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package li.selman.dershop.app.security;
+package li.selman.dershop.app;
 
-public final class AuthoritiesConstants {
-    public static final String ADMIN = "ROLE_ADMIN";
+public final class ProfileConstants {
 
-    public static final String PRODUCT_INFORMATION_MANAGER = "ROLE_PRODUCT_INFORMATION_MANAGER";
+    public static final String NO_LIQUIBASE = "NO_LIQUIBASE";
 
-    public static final String USER = "ROLE_USER";
+    public static final String PROD = "PROD";
 
-    public static final String ANONYMOUS = "ROLE_ANONYMOUS";
+    public static final String DEV = "DEV";
 
-    private AuthoritiesConstants() {
+    public static final String HEROKU = "HEROKU";
+
+    private ProfileConstants() {
         // NO-OP
     }
 }

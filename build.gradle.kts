@@ -24,6 +24,8 @@ dependencies {
     // Database Access
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     runtimeOnly("org.postgresql:postgresql")
+    implementation("org.liquibase:liquibase-core")
+//    implementation("org.liquibase:liquibase-hibernate5")
     implementation("org.springframework.boot:spring-boot-starter-validation")
 
     // Web
@@ -79,8 +81,14 @@ spotless {
     java {
         target(fileTree("src/**/*.java") {
             exclude(
+                // Manual source copy of apache-commons-lang3
                 "**/li/selman/dershop/app/security/RandomStringUtils.java",
-                "**/li/selman/dershop/app/security/RandomUtil.java")
+                // Manual source copies of certain classes from https://github.com/jhipster/jhipster-bom
+                "**/li/selman/dershop/app/security/RandomUtil.java",
+                "**/li.selman.dershop.app.persistence/AsyncSpringLiquibase.java",
+                "**/li.selman.dershop.app.persistence/LiquibaseConfiguration.java",
+                "**/li.selman.dershop.app.persistence/SpringLiquibaseUtil.java"
+            )
         })
     }
 }
