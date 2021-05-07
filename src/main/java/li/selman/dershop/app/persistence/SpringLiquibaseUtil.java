@@ -49,9 +49,12 @@ final class SpringLiquibaseUtil {
      * @param liquibaseProperties a {@link org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties} object.
      * @param dataSource a {@link javax.sql.DataSource} object.
      * @param dataSourceProperties a {@link org.springframework.boot.autoconfigure.jdbc.DataSourceProperties} object.
-     * @return a {@link liquibase.integration.spring.SpringLiquibase} object.
+     * @return a {@link liquibase.integration.spring.SpringLiquibase} object
      */
-    public static SpringLiquibase createSpringLiquibase(DataSource liquibaseDatasource, LiquibaseProperties liquibaseProperties, DataSource dataSource, DataSourceProperties dataSourceProperties) {
+    public static SpringLiquibase createSpringLiquibase(DataSource liquibaseDatasource,
+                                                        LiquibaseProperties liquibaseProperties,
+                                                        DataSource dataSource,
+                                                        DataSourceProperties dataSourceProperties) {
         SpringLiquibase liquibase;
         DataSource liquibaseDataSource = getDataSource(liquibaseDatasource, liquibaseProperties, dataSource);
         if (liquibaseDataSource != null) {
@@ -73,9 +76,14 @@ final class SpringLiquibaseUtil {
      * @param liquibaseProperties a {@link org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties} object.
      * @param dataSource a {@link javax.sql.DataSource} object.
      * @param dataSourceProperties a {@link org.springframework.boot.autoconfigure.jdbc.DataSourceProperties} object.
-     * @return a {@link AsyncSpringLiquibase} object.
+     * @return a {@link AsyncSpringLiquibase} object
      */
-    public static AsyncSpringLiquibase createAsyncSpringLiquibase(Environment env, Executor executor, DataSource liquibaseDatasource, LiquibaseProperties liquibaseProperties, DataSource dataSource, DataSourceProperties dataSourceProperties) {
+    public static AsyncSpringLiquibase createAsyncSpringLiquibase(Environment env,
+                                                                  Executor executor,
+                                                                  DataSource liquibaseDatasource,
+                                                                  LiquibaseProperties liquibaseProperties,
+                                                                  DataSource dataSource,
+                                                                  DataSourceProperties dataSourceProperties) {
         AsyncSpringLiquibase liquibase = new AsyncSpringLiquibase(executor, env);
         DataSource liquibaseDataSource = getDataSource(liquibaseDatasource, liquibaseProperties, dataSource);
         if (liquibaseDataSource != null) {
@@ -87,7 +95,8 @@ final class SpringLiquibaseUtil {
         return liquibase;
     }
 
-    private static DataSource getDataSource(DataSource liquibaseDataSource, LiquibaseProperties liquibaseProperties, DataSource dataSource) {
+    private static DataSource getDataSource(DataSource liquibaseDataSource, LiquibaseProperties liquibaseProperties,
+                                            DataSource dataSource) {
         if (liquibaseDataSource != null) {
             return liquibaseDataSource;
         }
@@ -97,7 +106,8 @@ final class SpringLiquibaseUtil {
         return null;
     }
 
-    private static DataSource createNewDataSource(LiquibaseProperties liquibaseProperties, DataSourceProperties dataSourceProperties) {
+    private static DataSource createNewDataSource(LiquibaseProperties liquibaseProperties,
+                                                  DataSourceProperties dataSourceProperties) {
         String url = getProperty(liquibaseProperties::getUrl, dataSourceProperties::determineUrl);
         String user = getProperty(liquibaseProperties::getUser, dataSourceProperties::determineUsername);
         String password = getProperty(liquibaseProperties::getPassword, dataSourceProperties::determinePassword);

@@ -20,6 +20,7 @@ import java.util.concurrent.Executor;
 import javax.sql.DataSource;
 import li.selman.dershop.app.ProfileConstants;
 import liquibase.integration.spring.SpringLiquibase;
+import org.jetbrains.annotations.NotNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -35,7 +36,7 @@ import org.springframework.core.env.Profiles;
 @Configuration
 public class LiquibaseConfiguration {
 
-    private final Logger log = LoggerFactory.getLogger(LiquibaseConfiguration.class);
+    private static final Logger log = LoggerFactory.getLogger(LiquibaseConfiguration.class);
 
     private final Environment env;
 
@@ -51,16 +52,18 @@ public class LiquibaseConfiguration {
         ObjectProvider<DataSource> dataSource,
         DataSourceProperties dataSourceProperties
     ) {
-        // If you don't want Liquibase to start asynchronously, substitute by this:
-        // SpringLiquibase liquibase = SpringLiquibaseUtil.createSpringLiquibase(liquibaseDataSource.getIfAvailable(), liquibaseProperties, dataSource.getIfUnique(), dataSourceProperties);
-        SpringLiquibase liquibase = SpringLiquibaseUtil.createAsyncSpringLiquibase(
-            this.env,
-            executor,
-            liquibaseDataSource.getIfAvailable(),
+         // If you don't want Liquibase to start asynchronously, substitute by this:
+//        SpringLiquibase liquibase = createSynchronousSpringLiquibaseConfig(liquibaseDataSource,
+//            liquibaseProperties,
+//            dataSource,
+//            dataSourceProperties);
+
+        SpringLiquibase liquibase = createAsyncSpringLiquibaseConfig(executor,
+            liquibaseDataSource,
             liquibaseProperties,
-            dataSource.getIfUnique(),
-            dataSourceProperties
-        );
+            dataSource,
+            dataSourceProperties);
+
         liquibase.setChangeLog("classpath:liquibase/master.xml");
         liquibase.setContexts(liquibaseProperties.getContexts());
         liquibase.setDefaultSchema(liquibaseProperties.getDefaultSchema());
@@ -81,5 +84,34 @@ public class LiquibaseConfiguration {
             log.debug("Configuring Liquibase");
         }
         return liquibase;
+    }
+
+    @NotNull
+    private AsyncSpringLiquibase createAsyncSpringLiquibaseConfig(Executor executor,
+                                                                  ObjectProvider<DataSource> liquibaseDataSource,
+                                                                  LiquibaseProperties liquibaseProperties,
+                                                                  ObjectProvider<DataSource> dataSource,
+                                                                  DataSourceProperties dataSourceProperties) {
+        return SpringLiquibaseUtil.createAsyncSpringLiquibase(
+            this.env,
+            executor,
+            liquibaseDataSource.getIfAvailable(),
+            liquibaseProperties,
+            dataSource.getIfUnique(),
+            dataSourceProperties
+        );
+    }
+
+    @NotNull
+    @SuppressWarnings("UnusedMethod")
+    private SpringLiquibase createSynchronousSpringLiquibaseConfig(ObjectProvider<DataSource> liquibaseDataSource,
+                                                                   LiquibaseProperties liquibaseProperties,
+                                                                   ObjectProvider<DataSource> dataSource,
+                                                                   DataSourceProperties dataSourceProperties) {
+        return SpringLiquibaseUtil.createSpringLiquibase(
+            liquibaseDataSource.getIfAvailable(),
+            liquibaseProperties,
+            dataSource.getIfUnique(),
+            dataSourceProperties);
     }
 }
