@@ -75,6 +75,7 @@ tasks.named<JavaCompile>("compileTestJava") {
 tasks.withType<JavaCompile>().configureEach {
     options.errorprone.disable("BracesRequired", "MissingSummary", "EqualsGetClass", "OptionalOrElseMethodInvocation",
         "PreferSafeLoggableExceptions", "PreferSafeLoggingPreconditions", "Slf4jConstantLogMessage",
+        "SameNameButDifferent", // Due to Lombok
         "StrictUnusedVariable" // Re-enable in the future
     )
 }
