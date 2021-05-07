@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdminUserDto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dershop</a> &gt; <a href="index.source.html" class="el_package">li.selman.dershop.user.dto</a> &gt; <span class="el_source">AdminUserDto.java</span></div><h1>AdminUserDto.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2021 Hasan Selman Kara. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package li.selman.dershop.user.dto;
+
+import java.time.Instant;
+import java.util.Set;
+import java.util.stream.Collectors;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+import li.selman.dershop.user.Authority;
+import li.selman.dershop.user.DerShopUser;
+import li.selman.dershop.user.UserConstants;
+import lombok.Getter;
+import lombok.Setter;
+
+/**
+ * A DTO representing a user, with his authorities.
+ */
+@Getter
+<span class="nc" id="L36">@Setter</span>
+public class AdminUserDto {
+
+<span class="nc" id="L39">    private Long id;</span>
+
+    @NotBlank
+    @Pattern(regexp = UserConstants.LOGIN_REGEX)
+    @Size(min = 1, max = 50)
+<span class="nc" id="L44">    private String login;</span>
+
+    @Size(max = 50)
+<span class="nc" id="L47">    private String firstName;</span>
+
+    @Size(max = 50)
+<span class="nc" id="L50">    private String lastName;</span>
+
+    @Email
+    @Size(min = 5, max = 254)
+<span class="nc" id="L54">    private String email;</span>
+
+<span class="nc" id="L56">    private boolean activated = false;</span>
+
+    @Size(min = 2, max = 10)
+<span class="nc" id="L59">    private String langKey;</span>
+
+<span class="nc" id="L61">    private String createdBy;</span>
+
+<span class="nc" id="L63">    private Instant createdDate;</span>
+
+<span class="nc" id="L65">    private String lastModifiedBy;</span>
+
+<span class="nc" id="L67">    private Instant lastModifiedDate;</span>
+
+<span class="nc" id="L69">    private Set&lt;String&gt; authorities;</span>
+
+<span class="nc" id="L71">    public AdminUserDto() {</span>
+        // Empty constructor needed for Jackson.
+<span class="nc" id="L73">    }</span>
+
+<span class="nc" id="L75">    public AdminUserDto(DerShopUser user) {</span>
+<span class="nc" id="L76">        this.id = user.getId();</span>
+<span class="nc" id="L77">        this.login = user.getLogin();</span>
+<span class="nc" id="L78">        this.firstName = user.getFirstName();</span>
+<span class="nc" id="L79">        this.lastName = user.getLastName();</span>
+<span class="nc" id="L80">        this.email = user.getEmail();</span>
+<span class="nc" id="L81">        this.activated = user.isActivated();</span>
+<span class="nc" id="L82">        this.langKey = user.getLangKey();</span>
+<span class="nc" id="L83">        this.createdBy = user.getCreatedBy();</span>
+<span class="nc" id="L84">        this.createdDate = user.getCreatedDate();</span>
+<span class="nc" id="L85">        this.lastModifiedBy = user.getLastModifiedBy();</span>
+<span class="nc" id="L86">        this.lastModifiedDate = user.getLastModifiedDate();</span>
+<span class="nc" id="L87">        this.authorities = user.getAuthorities().stream().map(Authority::getName).collect(Collectors.toSet());</span>
+<span class="nc" id="L88">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

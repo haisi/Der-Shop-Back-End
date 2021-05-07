@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LiquibaseConfiguration.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dershop</a> &gt; <a href="index.source.html" class="el_package">li.selman.dershop.app.persistence</a> &gt; <span class="el_source">LiquibaseConfiguration.java</span></div><h1>LiquibaseConfiguration.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2021 Hasan Selman Kara. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package li.selman.dershop.app.persistence;
+
+import java.util.concurrent.Executor;
+import javax.sql.DataSource;
+import li.selman.dershop.app.ProfileConstants;
+import liquibase.integration.spring.SpringLiquibase;
+import org.jetbrains.annotations.NotNull;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.autoconfigure.liquibase.LiquibaseDataSource;
+import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
+
+@Configuration
+public class LiquibaseConfiguration {
+
+<span class="fc" id="L39">    private static final Logger log = LoggerFactory.getLogger(LiquibaseConfiguration.class);</span>
+
+    private final Environment env;
+
+<span class="fc" id="L43">    public LiquibaseConfiguration(Environment env) {</span>
+<span class="fc" id="L44">        this.env = env;</span>
+<span class="fc" id="L45">    }</span>
+
+    @Bean
+    public SpringLiquibase liquibase(
+        @Qualifier(&quot;taskExecutor&quot;) Executor executor,
+        @LiquibaseDataSource ObjectProvider&lt;DataSource&gt; liquibaseDataSource,
+        LiquibaseProperties liquibaseProperties,
+        ObjectProvider&lt;DataSource&gt; dataSource,
+        DataSourceProperties dataSourceProperties
+    ) {
+         // If you don't want Liquibase to start asynchronously, substitute by this:
+//        SpringLiquibase liquibase = createSynchronousSpringLiquibaseConfig(liquibaseDataSource,
+//            liquibaseProperties,
+//            dataSource,
+//            dataSourceProperties);
+
+<span class="fc" id="L61">        SpringLiquibase liquibase = createAsyncSpringLiquibaseConfig(executor,</span>
+            liquibaseDataSource,
+            liquibaseProperties,
+            dataSource,
+            dataSourceProperties);
+
+<span class="fc" id="L67">        liquibase.setChangeLog(&quot;classpath:liquibase/master.xml&quot;);</span>
+<span class="fc" id="L68">        liquibase.setContexts(liquibaseProperties.getContexts());</span>
+<span class="fc" id="L69">        liquibase.setDefaultSchema(liquibaseProperties.getDefaultSchema());</span>
+<span class="fc" id="L70">        liquibase.setLiquibaseSchema(liquibaseProperties.getLiquibaseSchema());</span>
+<span class="fc" id="L71">        liquibase.setLiquibaseTablespace(liquibaseProperties.getLiquibaseTablespace());</span>
+<span class="fc" id="L72">        liquibase.setDatabaseChangeLogLockTable(liquibaseProperties.getDatabaseChangeLogLockTable());</span>
+<span class="fc" id="L73">        liquibase.setDatabaseChangeLogTable(liquibaseProperties.getDatabaseChangeLogTable());</span>
+<span class="fc" id="L74">        liquibase.setDropFirst(liquibaseProperties.isDropFirst());</span>
+<span class="fc" id="L75">        liquibase.setLabels(liquibaseProperties.getLabels());</span>
+<span class="fc" id="L76">        liquibase.setChangeLogParameters(liquibaseProperties.getParameters());</span>
+<span class="fc" id="L77">        liquibase.setRollbackFile(liquibaseProperties.getRollbackFile());</span>
+<span class="fc" id="L78">        liquibase.setTestRollbackOnUpdate(liquibaseProperties.isTestRollbackOnUpdate());</span>
+<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if (env.acceptsProfiles(Profiles.of(ProfileConstants.NO_LIQUIBASE))) {</span>
+<span class="nc" id="L80">            log.debug(&quot;Skipped Liquibase&quot;);</span>
+<span class="nc" id="L81">            liquibase.setShouldRun(false);</span>
+        } else {
+<span class="fc" id="L83">            liquibase.setShouldRun(liquibaseProperties.isEnabled());</span>
+<span class="fc" id="L84">            log.debug(&quot;Configuring Liquibase&quot;);</span>
+        }
+<span class="fc" id="L86">        return liquibase;</span>
+    }
+
+    @NotNull
+    private AsyncSpringLiquibase createAsyncSpringLiquibaseConfig(Executor executor,
+                                                                  ObjectProvider&lt;DataSource&gt; liquibaseDataSource,
+                                                                  LiquibaseProperties liquibaseProperties,
+                                                                  ObjectProvider&lt;DataSource&gt; dataSource,
+                                                                  DataSourceProperties dataSourceProperties) {
+<span class="fc" id="L95">        return SpringLiquibaseUtil.createAsyncSpringLiquibase(</span>
+            this.env,
+            executor,
+<span class="fc" id="L98">            liquibaseDataSource.getIfAvailable(),</span>
+            liquibaseProperties,
+<span class="fc" id="L100">            dataSource.getIfUnique(),</span>
+            dataSourceProperties
+        );
+    }
+
+    @NotNull
+    @SuppressWarnings(&quot;UnusedMethod&quot;)
+    private SpringLiquibase createSynchronousSpringLiquibaseConfig(ObjectProvider&lt;DataSource&gt; liquibaseDataSource,
+                                                                   LiquibaseProperties liquibaseProperties,
+                                                                   ObjectProvider&lt;DataSource&gt; dataSource,
+                                                                   DataSourceProperties dataSourceProperties) {
+<span class="nc" id="L111">        return SpringLiquibaseUtil.createSpringLiquibase(</span>
+<span class="nc" id="L112">            liquibaseDataSource.getIfAvailable(),</span>
+            liquibaseProperties,
+<span class="nc" id="L114">            dataSource.getIfUnique(),</span>
+            dataSourceProperties);
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JwtProperties.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dershop</a> &gt; <a href="index.source.html" class="el_package">li.selman.dershop.app.security.jwt</a> &gt; <span class="el_source">JwtProperties.java</span></div><h1>JwtProperties.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2021 Hasan Selman Kara. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package li.selman.dershop.app.security.jwt;
+
+import javax.validation.constraints.Min;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+@ConfigurationProperties(prefix = &quot;jwt&quot;)
+<span class="fc" id="L25">public class JwtProperties {</span>
+
+    /**
+     * Default is 24 hours.
+     */
+<span class="fc" id="L30">    @Min(1)</span>
+    private int tokenValidityInSeconds = 24 * 60 * 60;
+
+    /**
+     * Default is 30 days.
+     */
+<span class="fc" id="L36">    @Min(1)</span>
+    private int tokenValidityInSecondsForRememberMe = 30 * 24 * 60 * 60;
+
+    private String secret;
+
+    /**
+     * This token must be encoded using Base64 and be at least 256 bits long
+     * (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
+     */
+    private String base64Secret;
+
+    public int getTokenValidityInSeconds() {
+<span class="fc" id="L48">        return tokenValidityInSeconds;</span>
+    }
+
+    public void setTokenValidityInSeconds(int tokenValidityInSeconds) {
+<span class="nc" id="L52">        this.tokenValidityInSeconds = tokenValidityInSeconds;</span>
+<span class="nc" id="L53">    }</span>
+
+    public int getTokenValidityInSecondsForRememberMe() {
+<span class="fc" id="L56">        return tokenValidityInSecondsForRememberMe;</span>
+    }
+
+    public void setTokenValidityInSecondsForRememberMe(int tokenValidityInSecondsForRememberMe) {
+<span class="nc" id="L60">        this.tokenValidityInSecondsForRememberMe = tokenValidityInSecondsForRememberMe;</span>
+<span class="nc" id="L61">    }</span>
+
+    public String getSecret() {
+<span class="fc" id="L64">        return secret;</span>
+    }
+
+    public void setSecret(String secret) {
+<span class="nc" id="L68">        this.secret = secret;</span>
+<span class="nc" id="L69">    }</span>
+
+    public String getBase64Secret() {
+<span class="fc" id="L72">        return base64Secret;</span>
+    }
+
+    public void setBase64Secret(String base64Secret) {
+<span class="fc" id="L76">        this.base64Secret = base64Secret;</span>
+<span class="fc" id="L77">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

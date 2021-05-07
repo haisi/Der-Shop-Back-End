@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TokenProvider.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dershop</a> &gt; <a href="index.source.html" class="el_package">li.selman.dershop.app.security.jwt</a> &gt; <span class="el_source">TokenProvider.java</span></div><h1>TokenProvider.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2021 Hasan Selman Kara. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package li.selman.dershop.app.security.jwt;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
+import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
+
+@Component
+public class TokenProvider {
+
+<span class="fc" id="L45">    private static final Logger log = LoggerFactory.getLogger(TokenProvider.class);</span>
+
+    private static final String AUTHORITIES_KEY = &quot;auth&quot;;
+
+    private final Key key;
+
+    private final JwtParser jwtParser;
+
+    private final long tokenValidityInMilliseconds;
+
+    private final long tokenValidityInMillisecondsForRememberMe;
+
+<span class="fc" id="L57">    public TokenProvider(JwtProperties jwtProperties) {</span>
+        byte[] keyBytes;
+<span class="fc" id="L59">        String secret = jwtProperties.getSecret();</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        if (!ObjectUtils.isEmpty(secret)) {</span>
+<span class="nc" id="L61">            log.warn(&quot;Warning: the JWT key used is not Base64-encoded. &quot;</span>
+                + &quot;We recommend using the `jwt.base64-secret` key for optimum security.&quot;);
+<span class="nc" id="L63">            keyBytes = secret.getBytes(StandardCharsets.UTF_8);</span>
+        } else {
+<span class="fc" id="L65">            log.debug(&quot;Using a Base64-encoded JWT secret key&quot;);</span>
+<span class="fc" id="L66">            keyBytes = Decoders.BASE64.decode(jwtProperties.getBase64Secret());</span>
+        }
+<span class="fc" id="L68">        key = Keys.hmacShaKeyFor(keyBytes);</span>
+<span class="fc" id="L69">        jwtParser = Jwts.parserBuilder().setSigningKey(key).build();</span>
+<span class="fc" id="L70">        this.tokenValidityInMilliseconds = 1000 * jwtProperties.getTokenValidityInSeconds();</span>
+<span class="fc" id="L71">        this.tokenValidityInMillisecondsForRememberMe =</span>
+<span class="fc" id="L72">            1000 * jwtProperties.getTokenValidityInSecondsForRememberMe();</span>
+<span class="fc" id="L73">    }</span>
+
+    public String createToken(Authentication authentication, boolean rememberMe) {
+<span class="nc" id="L76">        String authorities = authentication.getAuthorities()</span>
+<span class="nc" id="L77">            .stream()</span>
+<span class="nc" id="L78">            .map(GrantedAuthority::getAuthority)</span>
+<span class="nc" id="L79">            .collect(Collectors.joining(&quot;,&quot;));</span>
+
+<span class="nc" id="L81">        long now = (new Date()).getTime();</span>
+        Date validity;
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (rememberMe) {</span>
+<span class="nc" id="L84">            validity = new Date(now + this.tokenValidityInMillisecondsForRememberMe);</span>
+        } else {
+<span class="nc" id="L86">            validity = new Date(now + this.tokenValidityInMilliseconds);</span>
+        }
+
+<span class="nc" id="L89">        return Jwts</span>
+<span class="nc" id="L90">            .builder()</span>
+<span class="nc" id="L91">            .setSubject(authentication.getName())</span>
+<span class="nc" id="L92">            .claim(AUTHORITIES_KEY, authorities)</span>
+<span class="nc" id="L93">            .signWith(key, SignatureAlgorithm.HS512)</span>
+<span class="nc" id="L94">            .setExpiration(validity)</span>
+<span class="nc" id="L95">            .compact();</span>
+    }
+
+    public Authentication getAuthentication(String token) {
+<span class="nc" id="L99">        Claims claims = jwtParser.parseClaimsJws(token).getBody();</span>
+
+<span class="nc" id="L101">        Collection&lt;? extends GrantedAuthority&gt; authorities = Arrays</span>
+<span class="nc" id="L102">            .stream(claims.get(AUTHORITIES_KEY).toString().split(&quot;,&quot;))</span>
+<span class="nc bnc" id="L103" title="All 2 branches missed.">            .filter(auth -&gt; !auth.trim().isEmpty())</span>
+<span class="nc" id="L104">            .map(SimpleGrantedAuthority::new)</span>
+<span class="nc" id="L105">            .collect(Collectors.toList());</span>
+
+<span class="nc" id="L107">        User principal = new User(claims.getSubject(), &quot;&quot;, authorities);</span>
+
+<span class="nc" id="L109">        return new UsernamePasswordAuthenticationToken(principal, token, authorities);</span>
+    }
+
+    public boolean validateToken(String authToken) {
+        try {
+<span class="nc" id="L114">            jwtParser.parseClaimsJws(authToken);</span>
+<span class="nc" id="L115">            return true;</span>
+<span class="nc" id="L116">        } catch (JwtException | IllegalArgumentException e) {</span>
+<span class="nc" id="L117">            log.info(&quot;Invalid JWT token.&quot;);</span>
+<span class="nc" id="L118">            log.trace(&quot;Invalid JWT token trace.&quot;, e);</span>
+        }
+<span class="nc" id="L120">        return false;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

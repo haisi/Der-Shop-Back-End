@@ -16,6 +16,7 @@
 package li.selman.dershop.product;
 
 import java.util.Map;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.UriTemplate;
@@ -26,24 +27,24 @@ import org.springframework.stereotype.Component;
  * @author Hasan Selman Kara
  */
 @Component
-<span class="nc" id="L29">public class ProductResourceProcessor implements RepresentationModelProcessor&lt;EntityModel&lt;Product&gt;&gt; {</span>
+<span class="fc" id="L30">public class ProductResourceProcessor implements RepresentationModelProcessor&lt;EntityModel&lt;Product&gt;&gt; {</span>
 
     public static final String IMAGE_REL = &quot;image&quot;;
 
     @Override
-    public EntityModel&lt;Product&gt; process(EntityModel&lt;Product&gt; resource) {
-<span class="nc bnc" id="L35" title="All 2 branches missed.">        if (resource.getContent() == null) {</span>
-<span class="nc" id="L36">            return resource;</span>
+    public @NotNull EntityModel&lt;Product&gt; process(EntityModel&lt;Product&gt; resource) {
+<span class="nc bnc" id="L36" title="All 2 branches missed.">        if (resource.getContent() == null) {</span>
+<span class="nc" id="L37">            return resource;</span>
         }
 
-<span class="nc" id="L39">        resource.add(Link.of(geProductImageUrl(resource.getContent()), IMAGE_REL));</span>
-<span class="nc" id="L40">        return resource;</span>
+<span class="nc" id="L40">        resource.add(Link.of(geProductImageUrl(resource.getContent()), IMAGE_REL));</span>
+<span class="nc" id="L41">        return resource;</span>
     }
 
     String geProductImageUrl(Product product) {
-<span class="nc" id="L44">        UriTemplate template = UriTemplate.of(&quot;http:www.s3.amazon.com/product-image/{id}&quot;);</span>
-<span class="nc" id="L45">        var uriVariables = Map.entry(&quot;id&quot;, product.getId().toString());</span>
-<span class="nc" id="L46">        return template.expand(uriVariables).toString();</span>
+<span class="nc" id="L45">        UriTemplate template = UriTemplate.of(&quot;http:www.s3.amazon.com/product-image/{id}&quot;);</span>
+<span class="nc" id="L46">        var uriVariables = Map.entry(&quot;id&quot;, product.getId().toString());</span>
+<span class="nc" id="L47">        return template.expand(uriVariables).toString();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta http-equiv="x-ua-compatible" content="IE=edge"/>
+<title>Test results - HibernateTimeZoneIT</title>
+<link href="../css/base-style.css" rel="stylesheet" type="text/css"/>
+<link href="../css/style.css" rel="stylesheet" type="text/css"/>
+<script src="../js/report.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="content">
+<h1>HibernateTimeZoneIT</h1>
+<div class="breadcrumbs">
+<a href="../index.html">all</a> &gt; 
+<a href="../packages/li.selman.dershop.app.persistence.html">li.selman.dershop.app.persistence</a> &gt; HibernateTimeZoneIT</div>
+<div id="summary">
+<table>
+<tr>
+<td>
+<div class="summaryGroup">
+<table>
+<tr>
+<td>
+<div class="infoBox" id="tests">
+<div class="counter">7</div>
+<p>tests</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="failures">
+<div class="counter">0</div>
+<p>failures</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="ignored">
+<div class="counter">0</div>
+<p>ignored</p>
+</div>
+</td>
+<td>
+<div class="infoBox" id="duration">
+<div class="counter">0.410s</div>
+<p>duration</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</td>
+<td>
+<div class="infoBox success" id="successRate">
+<div class="percent">100%</div>
+<p>successful</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div id="tabs">
+<ul class="tabLinks">
+<li>
+<a href="#tab0">Tests</a>
+</li>
+<li>
+<a href="#tab1">Standard output</a>
+</li>
+</ul>
+<div id="tab0" class="tab">
+<h2>Tests</h2>
+<table>
+<thead>
+<tr>
+<th>Test</th>
+<th>Duration</th>
+<th>Result</th>
+</tr>
+</thead>
+<tr>
+<td class="success">storeInstantWithZoneIdConfigShouldBeStoredOnGmtTimeZone()</td>
+<td class="success">0.011s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">storeLocalDateTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZone()</td>
+<td class="success">0.020s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">storeLocalDateWithZoneIdConfigShouldBeStoredWithoutTransformation()</td>
+<td class="success">0.021s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">storeLocalTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZoneAccordingToHis1stJan1970Value()</td>
+<td class="success">0.011s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">storeOffsetDateTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZone()</td>
+<td class="success">0.318s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">storeOffsetTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZoneAccordingToHis1stJan1970Value()</td>
+<td class="success">0.018s</td>
+<td class="success">passed</td>
+</tr>
+<tr>
+<td class="success">storeZoneDateTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZone()</td>
+<td class="success">0.011s</td>
+<td class="success">passed</td>
+</tr>
+</table>
+</div>
+<div id="tab1" class="tab">
+<h2>Standard output</h2>
+<span class="code">
+<pre>2021-05-07 20:10:02.688  INFO 5427 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Neither @ContextConfiguration nor @ContextHierarchy found for test class [li.selman.dershop.app.persistence.HibernateTimeZoneIT], using SpringBootContextLoader
+2021-05-07 20:10:02.689  INFO 5427 --- [    Test worker] o.s.t.c.support.AbstractContextLoader    : Could not detect default resource locations for test class [li.selman.dershop.app.persistence.HibernateTimeZoneIT]: no resource found for suffixes {-context.xml, Context.groovy}.
+2021-05-07 20:10:02.692  INFO 5427 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener, org.springframework.security.test.context.support.ReactorContextTestExecutionListener, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener, org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+2021-05-07 20:10:02.693  INFO 5427 --- [    Test worker] .b.t.c.SpringBootTestContextBootstrapper : Using TestExecutionListeners: [org.springframework.test.context.web.ServletTestExecutionListener@5478251, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@9e86f6b, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@1f81877a, org.springframework.boot.test.mock.mockito.MockitoTestExecutionListener@753c51dc, org.springframework.boot.test.autoconfigure.SpringBootDependencyInjectionTestExecutionListener@4cd00020, org.springframework.test.context.support.DirtiesContextTestExecutionListener@689bde6, org.springframework.test.context.transaction.TransactionalTestExecutionListener@1520501a, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener@20551d3, org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener@4e9890b3, org.springframework.test.context.event.EventPublishingTestExecutionListener@5b5620b, org.springframework.security.test.context.support.ReactorContextTestExecutionListener@12025227, org.springframework.boot.test.autoconfigure.restdocs.RestDocsTestExecutionListener@3a21027d, org.springframework.boot.test.autoconfigure.web.client.MockRestServiceServerResetTestExecutionListener@30361082, org.springframework.boot.test.autoconfigure.web.servlet.MockMvcPrintOnlyOnFailureTestExecutionListener@1ebd89b5, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverTestExecutionListener@1eae732f, org.springframework.boot.test.autoconfigure.webservices.client.MockWebServiceServerTestExecutionListener@2caeb86d, org.springframework.boot.test.mock.mockito.ResetMocksTestExecutionListener@2c9c1f7a]
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v2.4.5)
+
+2021-05-07 20:10:02.835  INFO 5427 --- [    Test worker] l.s.d.a.persistence.HibernateTimeZoneIT  : Starting HibernateTimeZoneIT using Java 11.0.11 on fv-az186-351 with PID 5427 (started by runner in /home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End)
+2021-05-07 20:10:02.837  INFO 5427 --- [    Test worker] l.s.d.a.persistence.HibernateTimeZoneIT  : No active profile set, falling back to default profiles: default
+2021-05-07 20:10:03.306  INFO 5427 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-05-07 20:10:03.322  INFO 5427 --- [    Test worker] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 14 ms. Found 4 JPA repository interfaces.
+2021-05-07 20:10:03.456  INFO 5427 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler@682b09ce' of type [org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-05-07 20:10:03.465  INFO 5427 --- [    Test worker] trationDelegate$BeanPostProcessorChecker : Bean 'methodSecurityMetadataSource' of type [org.springframework.security.access.method.DelegatingMethodSecurityMetadataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2021-05-07 20:10:03.505  INFO 5427 --- [    Test worker] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-05-07 20:10:03.579  INFO 5427 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2021-05-07 20:10:03.590  INFO 5427 --- [    Test worker] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2021-05-07 20:10:05.129  INFO 5427 --- [    Test worker] l.lockservice.StandardLockService        : Successfully acquired change log lock
+2021-05-07 20:10:05.401  INFO 5427 --- [    Test worker] l.c.StandardChangeLogHistoryService      : Reading from public.databasechangelog
+2021-05-07 20:10:05.420  INFO 5427 --- [    Test worker] l.lockservice.StandardLockService        : Successfully released change log lock
+2021-05-07 20:10:05.461  INFO 5427 --- [    Test worker] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-05-07 20:10:05.468  INFO 5427 --- [    Test worker] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.PostgreSQLDialect
+2021-05-07 20:10:05.653  INFO 5427 --- [    Test worker] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-05-07 20:10:05.654  INFO 5427 --- [    Test worker] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-05-07 20:10:05.844  WARN 5427 --- [    Test worker] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-05-07 20:10:06.167  INFO 5427 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/**', OPTIONS] with []
+2021-05-07 20:10:06.168  INFO 5427 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/app/**/*.{js,html}'] with []
+2021-05-07 20:10:06.169  INFO 5427 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/i18n/**'] with []
+2021-05-07 20:10:06.169  INFO 5427 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/content/**'] with []
+2021-05-07 20:10:06.169  INFO 5427 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/h2-console/**'] with []
+2021-05-07 20:10:06.170  INFO 5427 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/swagger-ui/**'] with []
+2021-05-07 20:10:06.170  INFO 5427 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure Ant [pattern='/test/**'] with []
+2021-05-07 20:10:06.241  INFO 5427 --- [    Test worker] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@211c6bdd, org.springframework.security.web.context.SecurityContextPersistenceFilter@66653e01, org.springframework.security.web.header.HeaderWriterFilter@3ac8da3, org.springframework.security.web.authentication.logout.LogoutFilter@152ebd77, org.springframework.web.filter.CorsFilter@631ffa4b, li.selman.dershop.app.security.jwt.JwtFilter@5b1bf534, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@1a9fca0b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4c3ee878, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2b98a5c9, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@30f75e5c, org.springframework.security.web.session.SessionManagementFilter@1fddd80c, org.springframework.security.web.access.ExceptionTranslationFilter@6429cb0e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1d3ed73c]
+2021-05-07 20:10:06.810  INFO 5427 --- [    Test worker] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2021-05-07 20:10:06.898  INFO 5427 --- [    Test worker] l.s.d.a.persistence.HibernateTimeZoneIT  : Started HibernateTimeZoneIT in 4.202 seconds (JVM running for 24.078)
+Hibernate: 
+    select
+        product0_.id as id1_4_,
+        product0_.name as name2_4_ 
+    from
+        product product0_
+2021-05-07 20:10:07.188  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@1b09a921, testMethod = storeOffsetDateTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZone@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@11598e88]; rollback [true]
+Hibernate: 
+    select
+        nextval ('sequence_generator')
+Hibernate: 
+    insert 
+    into
+        dershop_date_time_wrapper
+        (instant, local_date, local_date_time, local_time, offset_date_time, offset_time, zoned_date_time, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2021-05-07 20:10:07.493  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@1b09a921, testMethod = storeOffsetDateTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZone@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
+2021-05-07 20:10:07.503  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@5a05c44, testMethod = storeLocalDateTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZone@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@11598e88]; rollback [true]
+Hibernate: 
+    insert 
+    into
+        dershop_date_time_wrapper
+        (instant, local_date, local_date_time, local_time, offset_date_time, offset_time, zoned_date_time, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2021-05-07 20:10:07.519  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@5a05c44, testMethod = storeLocalDateTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZone@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
+2021-05-07 20:10:07.523  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@3c029fc6, testMethod = storeOffsetTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZoneAccordingToHis1stJan1970Value@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@11598e88]; rollback [true]
+Hibernate: 
+    insert 
+    into
+        dershop_date_time_wrapper
+        (instant, local_date, local_date_time, local_time, offset_date_time, offset_time, zoned_date_time, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2021-05-07 20:10:07.538  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@3c029fc6, testMethod = storeOffsetTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZoneAccordingToHis1stJan1970Value@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
+2021-05-07 20:10:07.541  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@759ee28a, testMethod = storeLocalDateWithZoneIdConfigShouldBeStoredWithoutTransformation@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@11598e88]; rollback [true]
+Hibernate: 
+    insert 
+    into
+        dershop_date_time_wrapper
+        (instant, local_date, local_date_time, local_time, offset_date_time, offset_time, zoned_date_time, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2021-05-07 20:10:07.561  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@759ee28a, testMethod = storeLocalDateWithZoneIdConfigShouldBeStoredWithoutTransformation@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
+2021-05-07 20:10:07.564  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@183bdbdd, testMethod = storeLocalTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZoneAccordingToHis1stJan1970Value@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@11598e88]; rollback [true]
+Hibernate: 
+    insert 
+    into
+        dershop_date_time_wrapper
+        (instant, local_date, local_date_time, local_time, offset_date_time, offset_time, zoned_date_time, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2021-05-07 20:10:07.573  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@183bdbdd, testMethod = storeLocalTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZoneAccordingToHis1stJan1970Value@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
+2021-05-07 20:10:07.576  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@6c45b89e, testMethod = storeInstantWithZoneIdConfigShouldBeStoredOnGmtTimeZone@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@11598e88]; rollback [true]
+Hibernate: 
+    insert 
+    into
+        dershop_date_time_wrapper
+        (instant, local_date, local_date_time, local_time, offset_date_time, offset_time, zoned_date_time, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2021-05-07 20:10:07.585  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@6c45b89e, testMethod = storeInstantWithZoneIdConfigShouldBeStoredOnGmtTimeZone@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
+2021-05-07 20:10:07.588  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Began transaction (1) for test context [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@30e44c6a, testMethod = storeZoneDateTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZone@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]; transaction manager [org.springframework.orm.jpa.JpaTransactionManager@11598e88]; rollback [true]
+Hibernate: 
+    insert 
+    into
+        dershop_date_time_wrapper
+        (instant, local_date, local_date_time, local_time, offset_date_time, offset_time, zoned_date_time, id) 
+    values
+        (?, ?, ?, ?, ?, ?, ?, ?)
+2021-05-07 20:10:07.598  INFO 5427 --- [    Test worker] o.s.t.c.transaction.TransactionContext   : Rolled back transaction for test: [DefaultTestContext@542170c testClass = HibernateTimeZoneIT, testInstance = li.selman.dershop.app.persistence.HibernateTimeZoneIT@30e44c6a, testMethod = storeZoneDateTimeWithZoneIdConfigShouldBeStoredOnGmtTimeZone@HibernateTimeZoneIT, testException = [null], mergedContextConfiguration = [WebMergedContextConfiguration@6955f53 testClass = HibernateTimeZoneIT, locations = '{}', classes = '{class li.selman.dershop.DerShopApplication}', contextInitializerClasses = '[]', activeProfiles = '{}', propertySourceLocations = '{}', propertySourceProperties = '{org.springframework.boot.test.context.SpringBootTestContextBootstrapper=true}', contextCustomizers = set[org.springframework.boot.test.autoconfigure.actuate.metrics.MetricsExportContextCustomizerFactory$DisableMetricExportContextCustomizer@6a033ade, org.springframework.boot.test.autoconfigure.properties.PropertyMappingContextCustomizer@0, org.springframework.boot.test.autoconfigure.web.servlet.WebDriverContextCustomizerFactory$Customizer@5f904250, org.springframework.boot.test.context.filter.ExcludeFilterContextCustomizer@172a4d2f, org.springframework.boot.test.json.DuplicateJsonObjectContextCustomizerFactory$DuplicateJsonObjectContextCustomizer@1ccf7631, org.springframework.boot.test.mock.mockito.MockitoContextCustomizer@0, org.springframework.boot.test.web.client.TestRestTemplateContextCustomizer@5d264faa, org.springframework.boot.test.context.SpringBootTestArgs@1, org.springframework.boot.test.context.SpringBootTestWebEnvironment@782001ca], resourceBasePath = 'src/main/webapp', contextLoader = 'org.springframework.boot.test.context.SpringBootContextLoader', parent = [null]], attributes = map['org.springframework.test.context.web.ServletTestExecutionListener.activateListener' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.populatedRequestContextHolder' -&gt; true, 'org.springframework.test.context.web.ServletTestExecutionListener.resetRequestContextHolder' -&gt; true, 'org.springframework.test.context.event.ApplicationEventsTestExecutionListener.recordApplicationEvents' -&gt; false]]
+</pre>
+</span>
+</div>
+</div>
+<div id="footer">
+<p>
+<div>
+<label class="hidden" id="label-for-line-wrapping-toggle" for="line-wrapping-toggle">Wrap lines
+<input id="line-wrapping-toggle" type="checkbox" autocomplete="off"/>
+</label>
+</div>Generated by 
+<a href="http://www.gradle.org">Gradle 6.8.3</a> at May 7, 2021, 8:10:08 PM</p>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AsyncSpringLiquibase.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dershop</a> &gt; <a href="index.source.html" class="el_package">li.selman.dershop.app.persistence</a> &gt; <span class="el_source">AsyncSpringLiquibase.java</span></div><h1>AsyncSpringLiquibase.java</h1><pre class="source lang-java linenums">/*
+ * Copyright 2016-2021 the original author or authors from the JHipster project.
+ *
+ * This file is part of the JHipster project, see https://www.jhipster.tech/
+ * for more information.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package li.selman.dershop.app.persistence;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.concurrent.Executor;
+import li.selman.dershop.app.ProfileConstants;
+import liquibase.exception.LiquibaseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.liquibase.DataSourceClosingSpringLiquibase;
+import org.springframework.core.env.Environment;
+import org.springframework.core.env.Profiles;
+import org.springframework.util.StopWatch;
+
+/**
+ * Specific liquibase.integration.spring.SpringLiquibase that will update the database asynchronously and close
+ * DataSource if necessary. &lt;p&gt; By default, this asynchronous version only works when using the &quot;dev&quot; profile.
+ * &lt;p&gt; The standard
+ * liquibase.integration.spring.SpringLiquibase starts Liquibase in the current thread: &lt;ul&gt; &lt;li&gt;This is needed if you
+ * want to do some database requests at startup&lt;/li&gt; &lt;li&gt;This ensure that the database is ready when the application
+ * starts&lt;/li&gt; &lt;/ul&gt; But as this is a rather slow process, we use this asynchronous version to speed up our start-up
+ * time: &lt;ul&gt; &lt;li&gt;On a recent MacBook Pro, start-up time is down from 14 seconds to 8 seconds&lt;/li&gt; &lt;li&gt;In production,
+ * this can help your application run on platforms like Heroku, where it must start/restart very quickly&lt;/li&gt; &lt;/ul&gt;
+ */
+public class AsyncSpringLiquibase extends DataSourceClosingSpringLiquibase {
+
+    /** Constant &lt;code&gt;DISABLED_MESSAGE=&quot;Liquibase is disabled&quot;&lt;/code&gt; */
+    public static final String DISABLED_MESSAGE = &quot;Liquibase is disabled&quot;;
+    /** Constant &lt;code&gt;STARTING_ASYNC_MESSAGE=&quot;Starting Liquibase asynchronously, your&quot;{trunked}&lt;/code&gt; */
+    public static final String STARTING_ASYNC_MESSAGE =
+        &quot;Starting Liquibase asynchronously, your database might not be ready at startup!&quot;;
+    /** Constant &lt;code&gt;STARTING_SYNC_MESSAGE=&quot;Starting Liquibase synchronously&quot;&lt;/code&gt; */
+    public static final String STARTING_SYNC_MESSAGE = &quot;Starting Liquibase synchronously&quot;;
+    /** Constant &lt;code&gt;STARTED_MESSAGE=&quot;Liquibase has updated your database in &quot;{trunked}&lt;/code&gt; */
+    public static final String STARTED_MESSAGE = &quot;Liquibase has updated your database in {} ms&quot;;
+    /** Constant &lt;code&gt;EXCEPTION_MESSAGE=&quot;Liquibase could not start correctly, yo&quot;{trunked}&lt;/code&gt; */
+    public static final String EXCEPTION_MESSAGE
+        = &quot;Liquibase could not start correctly, your database is NOT ready: {}&quot;;
+
+    /** Constant &lt;code&gt;SLOWNESS_THRESHOLD=5&lt;/code&gt; */
+    public static final long SLOWNESS_THRESHOLD = 5; // seconds
+    /** Constant &lt;code&gt;SLOWNESS_MESSAGE=&quot;Warning, Liquibase took more than {} se&quot;{trunked}&lt;/code&gt; */
+    public static final String SLOWNESS_MESSAGE = &quot;Warning, Liquibase took more than {} seconds to start up!&quot;;
+
+    // named &quot;logger&quot; because there is already a field called &quot;log&quot; in &quot;SpringLiquibase&quot;
+<span class="fc" id="L64">    private final Logger logger = LoggerFactory.getLogger(AsyncSpringLiquibase.class);</span>
+
+    private final Executor executor;
+
+    private final Environment env;
+
+    /**
+     * &lt;p&gt;Constructor for AsyncSpringLiquibase.&lt;/p&gt;
+     *
+     * @param executor a {@link java.util.concurrent.Executor} object.
+     * @param env a {@link org.springframework.core.env.Environment} object.
+     */
+<span class="fc" id="L76">    public AsyncSpringLiquibase(Executor executor, Environment env) {</span>
+<span class="fc" id="L77">        this.executor = executor;</span>
+<span class="fc" id="L78">        this.env = env;</span>
+<span class="fc" id="L79">    }</span>
+
+    /** {@inheritDoc} */
+    @Override
+    public void afterPropertiesSet() throws LiquibaseException {
+<span class="pc bpc" id="L84" title="1 of 2 branches missed.">        if (!env.acceptsProfiles(Profiles.of(ProfileConstants.NO_LIQUIBASE))) {</span>
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">            if (env.acceptsProfiles(Profiles.of(ProfileConstants.DEV + &quot;|&quot; + ProfileConstants.HEROKU))) {</span>
+                // Prevent Thread Lock with spring-cloud-context GenericScope
+                // https://github.com/spring-cloud/spring-cloud-commons/commit/aaa7288bae3bb4d6fdbef1041691223238d77b7b#diff-afa0715eafc2b0154475fe672dab70e4R328
+<span class="nc" id="L88">                try (Connection connection = getDataSource().getConnection()) {</span>
+<span class="nc" id="L89">                    executor.execute(() -&gt; {</span>
+                        try {
+<span class="nc" id="L91">                            logger.warn(STARTING_ASYNC_MESSAGE);</span>
+<span class="nc" id="L92">                            initDb();</span>
+<span class="nc" id="L93">                        } catch (LiquibaseException e) {</span>
+<span class="nc" id="L94">                            logger.error(EXCEPTION_MESSAGE, e.getMessage(), e);</span>
+<span class="nc" id="L95">                        }</span>
+<span class="nc" id="L96">                    });</span>
+<span class="nc" id="L97">                } catch (SQLException e) {</span>
+<span class="nc" id="L98">                    logger.error(EXCEPTION_MESSAGE, e.getMessage(), e);</span>
+<span class="nc" id="L99">                }</span>
+            } else {
+<span class="fc" id="L101">                logger.debug(STARTING_SYNC_MESSAGE);</span>
+<span class="fc" id="L102">                initDb();</span>
+            }
+        } else {
+<span class="nc" id="L105">            logger.debug(DISABLED_MESSAGE);</span>
+        }
+<span class="fc" id="L107">    }</span>
+
+    /**
+     * &lt;p&gt;initDb.&lt;/p&gt;
+     *
+     * @throws liquibase.exception.LiquibaseException if any.
+     */
+    protected void initDb() throws LiquibaseException {
+<span class="fc" id="L115">        StopWatch watch = new StopWatch();</span>
+<span class="fc" id="L116">        watch.start();</span>
+<span class="fc" id="L117">        super.afterPropertiesSet();</span>
+<span class="fc" id="L118">        watch.stop();</span>
+<span class="fc" id="L119">        logger.debug(STARTED_MESSAGE, watch.getTotalTimeMillis());</span>
+<span class="pc bpc" id="L120" title="1 of 2 branches missed.">        if (watch.getTotalTimeMillis() &gt; SLOWNESS_THRESHOLD * 1000L) {</span>
+<span class="nc" id="L121">            logger.warn(SLOWNESS_MESSAGE, SLOWNESS_THRESHOLD);</span>
+        }
+<span class="fc" id="L123">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

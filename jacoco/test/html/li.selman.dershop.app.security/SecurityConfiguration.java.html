@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SecurityConfiguration.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dershop</a> &gt; <a href="index.source.html" class="el_package">li.selman.dershop.app.security</a> &gt; <span class="el_source">SecurityConfiguration.java</span></div><h1>SecurityConfiguration.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2021 Hasan Selman Kara. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package li.selman.dershop.app.security;
+
+import li.selman.dershop.app.security.jwt.JwtConfiguration;
+import li.selman.dershop.app.security.jwt.TokenProvider;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Import;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.header.writers.ReferrerPolicyHeaderWriter;
+import org.springframework.web.filter.CorsFilter;
+
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
+@Import(SecurityProblemSupport.class)
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @SuppressWarnings(&quot;checkstyle:LineLength&quot;)
+    private static final String contentSecurityPolicy =
+        &quot;default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://storage.googleapis.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:&quot;;
+
+    @SuppressWarnings(&quot;checkstyle:LineLength&quot;)
+    private static final String featurePolicyHeaders =
+        &quot;geolocation 'none'; midi 'none'; sync-xhr 'none'; microphone 'none'; camera 'none'; magnetometer 'none'; gyroscope 'none'; fullscreen 'self'; payment 'none'&quot;;
+
+    private final TokenProvider tokenProvider;
+
+    private final CorsFilter corsFilter;
+    private final SecurityProblemSupport problemSupport;
+
+    public SecurityConfiguration(
+        CorsFilter corsFilter,
+        TokenProvider tokenProvider,
+        SecurityProblemSupport problemSupport
+<span class="fc" id="L58">    ) {</span>
+<span class="fc" id="L59">        this.tokenProvider = tokenProvider;</span>
+<span class="fc" id="L60">        this.corsFilter = corsFilter;</span>
+<span class="fc" id="L61">        this.problemSupport = problemSupport;</span>
+<span class="fc" id="L62">    }</span>
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+<span class="fc" id="L66">        return new BCryptPasswordEncoder();</span>
+    }
+
+    @Override
+    public void configure(WebSecurity web) {
+<span class="fc" id="L71">        web</span>
+<span class="fc" id="L72">            .ignoring()</span>
+<span class="fc" id="L73">            .antMatchers(HttpMethod.OPTIONS, &quot;/**&quot;)</span>
+<span class="fc" id="L74">            .antMatchers(&quot;/app/**/*.{js,html}&quot;)</span>
+<span class="fc" id="L75">            .antMatchers(&quot;/i18n/**&quot;)</span>
+<span class="fc" id="L76">            .antMatchers(&quot;/content/**&quot;)</span>
+<span class="fc" id="L77">            .antMatchers(&quot;/h2-console/**&quot;)</span>
+<span class="fc" id="L78">            .antMatchers(&quot;/swagger-ui/**&quot;)</span>
+<span class="fc" id="L79">            .antMatchers(&quot;/test/**&quot;);</span>
+<span class="fc" id="L80">    }</span>
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
+        // @formatter:off
+<span class="fc" id="L85">        http</span>
+<span class="fc" id="L86">            .csrf()</span>
+<span class="fc" id="L87">            .disable()</span>
+<span class="fc" id="L88">            .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)</span>
+<span class="fc" id="L89">            .exceptionHandling()</span>
+<span class="fc" id="L90">                .authenticationEntryPoint(problemSupport)</span>
+<span class="fc" id="L91">                .accessDeniedHandler(problemSupport)</span>
+<span class="fc" id="L92">            .and()</span>
+<span class="fc" id="L93">                .headers()</span>
+<span class="fc" id="L94">                .contentSecurityPolicy(contentSecurityPolicy)</span>
+<span class="fc" id="L95">            .and()</span>
+<span class="fc" id="L96">                .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)</span>
+<span class="fc" id="L97">            .and()</span>
+<span class="fc" id="L98">                .featurePolicy(featurePolicyHeaders)</span>
+<span class="fc" id="L99">            .and()</span>
+<span class="fc" id="L100">                .frameOptions()</span>
+<span class="fc" id="L101">                .deny()</span>
+<span class="fc" id="L102">            .and()</span>
+<span class="fc" id="L103">                .sessionManagement()</span>
+<span class="fc" id="L104">                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)</span>
+<span class="fc" id="L105">            .and()</span>
+<span class="fc" id="L106">                .authorizeRequests()</span>
+<span class="fc" id="L107">                .antMatchers(&quot;/api/authenticate&quot;).permitAll()</span>
+<span class="fc" id="L108">                .antMatchers(&quot;/api/register&quot;).permitAll()</span>
+<span class="fc" id="L109">                .antMatchers(&quot;/api/activate&quot;).permitAll()</span>
+<span class="fc" id="L110">                .antMatchers(&quot;/api/account/reset-password/init&quot;).permitAll()</span>
+<span class="fc" id="L111">                .antMatchers(&quot;/api/account/reset-password/finish&quot;).permitAll()</span>
+<span class="fc" id="L112">                .antMatchers(&quot;/api/admin/**&quot;).hasAuthority(AuthoritiesConstants.ADMIN)</span>
+<span class="fc" id="L113">                .antMatchers(&quot;/api/**&quot;).authenticated()</span>
+<span class="fc" id="L114">                .antMatchers(&quot;/actuator/health&quot;).permitAll()</span>
+<span class="fc" id="L115">                .antMatchers(&quot;/actuator/health/**&quot;).permitAll()</span>
+<span class="fc" id="L116">                .antMatchers(&quot;/actuator/info&quot;).permitAll()</span>
+<span class="fc" id="L117">                .antMatchers(&quot;/actuator/prometheus&quot;).permitAll()</span>
+<span class="fc" id="L118">                .antMatchers(&quot;/actuator/**&quot;).hasAuthority(AuthoritiesConstants.ADMIN)</span>
+<span class="fc" id="L119">            .and()</span>
+<span class="fc" id="L120">                .httpBasic()</span>
+<span class="fc" id="L121">            .and()</span>
+<span class="fc" id="L122">                .apply(securityConfigurerAdapter());</span>
+        // @formatter:on
+<span class="fc" id="L124">    }</span>
+
+    private JwtConfiguration securityConfigurerAdapter() {
+<span class="fc" id="L127">        return new JwtConfiguration(tokenProvider);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

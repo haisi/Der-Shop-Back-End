@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>JwtAuthenticationController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">dershop</a> &gt; <a href="index.source.html" class="el_package">li.selman.dershop.app.security.jwt</a> &gt; <span class="el_source">JwtAuthenticationController.java</span></div><h1>JwtAuthenticationController.java</h1><pre class="source lang-java linenums">/*
+ * (c) Copyright 2021 Hasan Selman Kara. All rights reserved.
+ *
+ * Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package li.selman.dershop.app.security.jwt;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import lombok.Data;
+import lombok.Value;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * Controller to authenticate users.
+ */
+@RestController
+@RequestMapping(&quot;/api&quot;)
+public class JwtAuthenticationController {
+
+    private final TokenProvider tokenProvider;
+
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+
+    public JwtAuthenticationController(
+        TokenProvider tokenProvider,
+        AuthenticationManagerBuilder authenticationManagerBuilder
+<span class="fc" id="L51">    ) {</span>
+<span class="fc" id="L52">        this.tokenProvider = tokenProvider;</span>
+<span class="fc" id="L53">        this.authenticationManagerBuilder = authenticationManagerBuilder;</span>
+<span class="fc" id="L54">    }</span>
+
+    @PostMapping(&quot;/authenticate&quot;)
+    public ResponseEntity&lt;JwtToken&gt; authorize(@Valid @RequestBody LoginVm loginVm) {
+<span class="nc" id="L58">        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(</span>
+<span class="nc" id="L59">            loginVm.getUsername(),</span>
+<span class="nc" id="L60">            loginVm.getPassword()</span>
+        );
+
+<span class="nc" id="L63">        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);</span>
+<span class="nc" id="L64">        SecurityContextHolder.getContext().setAuthentication(authentication);</span>
+<span class="nc" id="L65">        String jwt = tokenProvider.createToken(authentication, loginVm.isRememberMe());</span>
+<span class="nc" id="L66">        HttpHeaders httpHeaders = new HttpHeaders();</span>
+<span class="nc" id="L67">        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, &quot;Bearer &quot; + jwt);</span>
+<span class="nc" id="L68">        return new ResponseEntity&lt;&gt;(new JwtToken(jwt), httpHeaders, HttpStatus.OK);</span>
+    }
+
+    /**
+     * Object to return as body in JWT Authentication.
+     */
+<span class="nc bnc" id="L74" title="All 12 branches missed.">    @Value</span>
+    static class JwtToken {
+        @JsonProperty(&quot;id_token&quot;)
+<span class="nc" id="L77">        String idToken;</span>
+    }
+
+<span class="nc bnc" id="L80" title="All 26 branches missed.">    @Data</span>
+    static class LoginVm {
+
+        @NotNull
+        @Size(min = 1, max = 50)
+<span class="nc" id="L85">        private String username;</span>
+
+        @NotNull
+        @Size(min = 4, max = 100)
+<span class="nc" id="L89">        private String password;</span>
+
+<span class="nc" id="L91">        private boolean rememberMe;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

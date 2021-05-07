@@ -2,6 +2,52 @@
 <checkstyle version="8.40">
 <file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/DerShopApplication.java">
 </file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/ProfileConstants.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/package-info.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/persistence/AbstractAuditingEntity.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/persistence/AsyncSpringLiquibase.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/persistence/LiquibaseConfiguration.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/persistence/SpringLiquibaseUtil.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/AuthoritiesConstants.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/CorsConfiguration.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/DerShopUserDetailsService.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/EmailAlreadyUsedException.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/InvalidPasswordException.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/RandomStringUtils.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/RandomUtil.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/SecurityConfiguration.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/SecurityProblemSupport.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/SecurityUtils.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/UserNotActivatedException.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/UsernameAlreadyUsedException.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/jwt/JwtAuthenticationController.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/jwt/JwtConfiguration.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/jwt/JwtFilter.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/jwt/JwtProperties.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/app/security/jwt/TokenProvider.java">
+</file>
 <file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/product/Product.java">
 </file>
 <file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/product/ProductController.java">
@@ -9,5 +55,21 @@
 <file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/product/ProductRepository.java">
 </file>
 <file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/product/ProductResourceProcessor.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/user/Authority.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/user/AuthorityRepository.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/user/DerShopUser.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/user/UserConstants.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/user/UserRepository.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/user/UserService.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/user/dto/AdminUserDto.java">
+</file>
+<file name="/home/runner/work/Der-Shop-Back-End/Der-Shop-Back-End/src/main/java/li/selman/dershop/user/dto/UserDto.java">
 </file>
 </checkstyle>

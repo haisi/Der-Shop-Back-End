@@ -19,42 +19,46 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
 
 /**
  * @author Hasan Selman Kara
  */
 @Entity
+@Table(name = &quot;product&quot;)
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = &quot;sequenceGenerator&quot;)
+    @SequenceGenerator(name = &quot;sequenceGenerator&quot;)
     private Long id;
     private String name;
 
     // Why JPA
-<span class="nc" id="L35">    protected Product() {</span>
-<span class="nc" id="L36">    }</span>
+<span class="fc" id="L39">    protected Product() {</span>
+<span class="fc" id="L40">    }</span>
 
-<span class="fc" id="L38">    Product(Long id, String name) {</span>
-<span class="fc" id="L39">        this.id = id;</span>
-<span class="fc" id="L40">        this.name = name;</span>
-<span class="fc" id="L41">    }</span>
-
-<span class="fc" id="L43">    public Product(String name) {</span>
+<span class="fc" id="L42">    Product(Long id, String name) {</span>
+<span class="fc" id="L43">        this.id = id;</span>
 <span class="fc" id="L44">        this.name = name;</span>
 <span class="fc" id="L45">    }</span>
 
+<span class="nc" id="L47">    public Product(String name) {</span>
+<span class="nc" id="L48">        this.name = name;</span>
+<span class="nc" id="L49">    }</span>
+
     public Long getId() {
-<span class="fc" id="L48">        return id;</span>
+<span class="fc" id="L52">        return id;</span>
     }
 
     public String getName() {
-<span class="fc" id="L52">        return name;</span>
+<span class="fc" id="L56">        return name;</span>
     }
 
     @Override
     public String toString() {
-<span class="nc" id="L57">        return &quot;Product{&quot;</span>
+<span class="nc" id="L61">        return &quot;Product{&quot;</span>
             + &quot;id=&quot; + id
             + &quot;, name='&quot; + name + '\''
             + '}';
