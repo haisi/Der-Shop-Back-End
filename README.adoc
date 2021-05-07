@@ -16,6 +16,8 @@ I use this project to try out and keep track of the latest and greatest tools an
 * [x] Spring Rest Docs
 * [x] Actuator / Prometheus
 * [x] Lombok
+* [x] Continuous Integration with GitHub Actions
+* [ ] Continuous Delivery to Pivotal Cloud Foundry
 
 == Build
 
