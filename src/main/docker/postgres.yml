@@ -8,7 +8,7 @@ services:
         environment:
             - POSTGRES_DB=dershop
             - POSTGRES_USER=dershop-user
-            - POSTGRES_PASSWORD=
+            - POSTGRES_PASSWORD=postgres-pw
             - POSTGRES_HOST_AUTH_METHOD=trust
         ports:
             - 5432:5432
