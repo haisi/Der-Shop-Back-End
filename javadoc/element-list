@@ -1,0 +1,8 @@
+li.selman.dershop
+li.selman.dershop.app
+li.selman.dershop.app.persistence
+li.selman.dershop.app.security
+li.selman.dershop.app.security.jwt
+li.selman.dershop.product
+li.selman.dershop.user
+li.selman.dershop.user.dto
