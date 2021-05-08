@@ -89,6 +89,13 @@ asciidoctorj {
     }
 }
 
+tasks.named<org.asciidoctor.gradle.jvm.AsciidoctorTask>("asciidoctor") {
+    // By default the output dir is "build/docs/asciidoc".
+    // For github-pages we expose the "docs" root directory.
+    // However, we want to use the asciidoc as the index page of the website.
+    setOutputDir(file("build/docs"))
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
 }
