@@ -98,6 +98,11 @@ spotless {
     }
 }
 
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
 tasks.withType<Javadoc>().configureEach {
     options.encoding = "UTF-8"
 }
