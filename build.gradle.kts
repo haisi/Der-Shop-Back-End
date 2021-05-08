@@ -78,7 +78,6 @@ spotless {
 }
 
 java {
-    withSourcesJar()
     withJavadocJar()
 }
 
@@ -130,11 +129,11 @@ tasks.asciidoctor {
 
 // So we can access the docs from http://URL/docs/index.html when we build the jar.
 // $ ./gradlew build
-// $ java -jar build/libs/*.jar
+// $ find build/libs/*.jar -type f -not -name "*javadoc*" | xargs java -jar
 // Visit: http://localhost:8888/docs/index.html
 tasks.named<BootJar>("bootJar") {
     dependsOn(tasks.asciidoctor)
-    from("${buildDir.name}/asciidoc/html5") {
+    from("${buildDir.name}/docs") {
         into("static/docs")
     }
 }
