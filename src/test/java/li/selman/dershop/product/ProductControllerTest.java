@@ -90,12 +90,13 @@ class ProductControllerTest {
         FieldDescriptor[] productDescriptor = getProductFieldDescriptor();
 
         // when
-        ResultActions result = this.mockMvc.perform(get("/api/products"));
+        ResultActions result = this.mockMvc.perform(
+            get("/api/products").header("Accept", "application/hal+json"));
 
         // then
         result
             .andExpect(status().isOk())
-            .andExpect(jsonPath("$..productList[0].name").value("Product A"))
+            .andExpect(jsonPath("$..products[0].name").value("Product A"))
             .andDo(document("products-findAll", responseFields(productDescriptor)));
     }
 
@@ -103,10 +104,10 @@ class ProductControllerTest {
         return new FieldDescriptor[]{
 //            subsectionWithPath("_embedded").ignored(),
             fieldWithPath("_embedded").ignored(),
-            fieldWithPath("_embedded.productList").ignored(),
-            fieldWithPath("_embedded.productList[].id")
+            fieldWithPath("_embedded.products").ignored(),
+            fieldWithPath("_embedded.products[].id")
                 .description("The unique id of the product entity").type(Long.class.getSimpleName()),
-            fieldWithPath("_embedded.productList[].name")
+            fieldWithPath("_embedded.products[].name")
                 .description("The name of the product").type(String.class.getSimpleName())
         };
     }

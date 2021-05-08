@@ -31,6 +31,8 @@ dependencies {
     // Web
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-hateoas")
+    implementation("org.springframework.boot:spring-boot-starter-data-rest")
+    runtimeOnly("org.springframework.data:spring-data-rest-hal-explorer")
 
     // Security
     implementation("org.springframework.boot:spring-boot-starter-security")
