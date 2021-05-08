@@ -63,22 +63,51 @@ TBD
 
 === CI/CD Pipeline
 
-TBD
-
-[plantuml, diagram-classes, png]
+[plantuml, CI/CD Pipeline GitHub Actions, png]
+.CI/CD Pipleline running on GitHub
 ....
-interface DslElement {
-    +int: getDslWeight()
+skinparam defaultTextAlignment center
+|#palegreen|f| Setup
+|c| Build
+|#gold|e| Publish
+|f|
+start
+:Start postgres\nservice container;
+:Checkout Code;
+:Install graphviz\nfor asciidoc diagrams;
+:Setup JDK 11;
+:Setup Gradle;
+|c|
+partition "**process** Gradle" {
+    :compileJava;
+    :error prone;
+    note left: Static code analyser to find bugs
+    partition "**task** test" {
+        :test;
+        note left
+          Regular JUnit Test
+          ====
+          Integration Tests
+          1. Starts the Spring-Context
+          2. Connects to Postgres
+          3. Runs Liquibase for DB-schema
+          4. Generates asciidoc for Spring-Rest-Docs
+        end note
+    }
+    :asciidoctor;
+    note left: Generate HTML output of asciidoc
+    :JavaDoc;
+    :checkstyle;
+    note left: Static code analyser to find style issues
+    :spotless;
+    note left: Code formatter
+    :JaCoCo;
+    note left: Test coverage
 }
-interface Position {
-    +int: evalToPosition(String)
-}
-class DynamicPosition
-class ConstantPosition
-
-DslElement <|.. Position
-Position <|.. DynamicPosition
-Position <|.. ConstantPosition
+|e|
+:Move reports\nto docs dir;
+:Publish to\ngh-pages;
+stop
 ....
 
 === Logging
