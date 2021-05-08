@@ -1,16 +1,79 @@
-= DerShop REST-API Docs
-Hasan Selman Kara;
+= DerShop System Documentation
+:author: Hasan Selman Kara
+:email:  hasan.selman.kara@gmail.com
+:revnumber: 1.0
+:subject: DerShop Documentation
 :doctype: book
+:lang: en
+:toc: preamble
+:toclevels: 2
 :icons: font
 :source-highlighter: highlightjs
 
+This is the documentation of a (work in progress) e-commerce system for a fictitious company called "DerShop".
+I use this project to try out and keep track of the latest and greatest tools and tricks to build Spring Boot applications.
+
+|===
+|https://github.com/haisi/Der-Shop-Back-End[*Source code*] |https://selman.li/Der-Shop-Back-End/javadoc[*JavaDoc*]|https://github.com/haisi/Der-Shop-Back-End/blob/master/LICENSE[*License*]|https://selman.li/Der-Shop-Back-End/tests/test/[*Tests*]|https://selman.li/Der-Shop-Back-End/jacoco/test/html/[*Test Coverage*]
+|===
+
+:toc:
+
+= Resources
+
+In this section we describe all the resources which get exposed by the system.
+
+== Cross Cutting Concerns
+
+In this sub section we describe overall information and requirements to interact with DerShop's resources.
+
+=== Authentication
+
+TBD
+
+=== Caching
+
+TBD
+
+== Product
+
 TBD General info about the API
 
-include::{snippets}/products-findAll/curl-request.adoc[]
-include::{snippets}/products-findAll/response-fields.adoc[]
+=== All products
+
+==== HTTP request
+include::{snippets}/products-findAll/http-request.adoc[]
+
+==== Request Body
 include::{snippets}/products-findAll/request-body.adoc[]
+
+==== Response Fields
+include::{snippets}/products-findAll/response-fields.adoc[]
+
+==== Response Body
 include::{snippets}/products-findAll/response-body.adoc[]
 
-test
+= Build
 
-operation::products-findAll[snippets='response-fields,http-response']
+TBD
+
+== CI/CD Pipeline
+
+TBD
+
+[plantuml, diagram-classes, png]
+....
+interface DslElement {
+    +int: getDslWeight()
+}
+interface Position {
+    +int: evalToPosition(String)
+}
+class DynamicPosition
+class ConstantPosition
+
+DslElement <|.. Position
+Position <|.. DynamicPosition
+Position <|.. ConstantPosition
+....
+

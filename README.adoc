@@ -5,6 +5,8 @@ image::https://github.com/haisi/Der-Shop-Back-End/actions/workflows/gradle.yml/b
 This is a (work in progress) e-commerce system for a fictitious company called "DerShop".
 I use this project to try out and keep track of the latest and greatest tools and tricks to build Spring Boot applications.
 
+The documentation can be found here: https://selman.li/Der-Shop-Back-End/
+
 .Subjects Covered
 * [ ] DDD
 * [x] JPA / Hibernate
@@ -15,9 +17,9 @@ I use this project to try out and keep track of the latest and greatest tools an
 * [x] Spring Security with JWT
 * [x] Spring Rest Docs
 * [x] Actuator / Prometheus
-* [x] Lombok
+* [x] Lombok 🌶
 * [x] Continuous Integration with GitHub Actions
-* [ ] Continuous Delivery to Pivotal Cloud Foundry
+* [ ] Continuous Delivery to Heroku or Azure 🤔
 
 == Build
 
