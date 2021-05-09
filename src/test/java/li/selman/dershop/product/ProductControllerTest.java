@@ -37,6 +37,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.restdocs.RestDocumentationContextProvider;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.payload.FieldDescriptor;
+import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -108,22 +109,22 @@ class ProductControllerTest {
             fieldWithPath("_embedded").ignored(),
             fieldWithPath("_embedded.products").ignored(),
             fieldWithPath("_embedded.products[].id")
-                .description("The unique id of the product entity").type(Long.class.getSimpleName()),
+                .description("The unique id of the product entity").type(JsonFieldType.NUMBER),
             fieldWithPath("_embedded.products[].name")
-                .description("The name of the product").type(String.class.getSimpleName()),
+                .description("The name of the product").type(JsonFieldType.STRING),
 
             fieldWithPath("_embedded.products[]._links").ignored(),
 
             fieldWithPath("_embedded.products[]._links.self")
-                .description("Links to the entity itself").type(String.class.getSimpleName()),
+                .description("Links to the entity itself").type(JsonFieldType.OBJECT),
             fieldWithPath("_embedded.products[]._links.self.href").ignored(),
 
             fieldWithPath("_embedded.products[]._links.products")
-                .description("Links to all available products").type(String.class.getSimpleName()),
+                .description("Links to all available products").type(JsonFieldType.OBJECT),
             fieldWithPath("_embedded.products[]._links.products.href").ignored(),
 
             fieldWithPath("_embedded.products[]._links.image")
-                .description("Links to the articles image").type(String.class.getSimpleName()),
+                .description("Links to the articles image").type(JsonFieldType.OBJECT),
             fieldWithPath("_embedded.products[]._links.image.href").ignored(),
         };
     }
