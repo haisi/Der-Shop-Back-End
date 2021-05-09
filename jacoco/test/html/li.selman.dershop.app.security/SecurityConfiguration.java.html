@@ -74,57 +74,55 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 <span class="fc" id="L74">            .antMatchers(&quot;/app/**/*.{js,html}&quot;)</span>
 <span class="fc" id="L75">            .antMatchers(&quot;/i18n/**&quot;)</span>
 <span class="fc" id="L76">            .antMatchers(&quot;/content/**&quot;)</span>
-<span class="fc" id="L77">            .antMatchers(&quot;/h2-console/**&quot;)</span>
-<span class="fc" id="L78">            .antMatchers(&quot;/swagger-ui/**&quot;)</span>
-<span class="fc" id="L79">            .antMatchers(&quot;/test/**&quot;);</span>
-<span class="fc" id="L80">    }</span>
+<span class="fc" id="L77">            .antMatchers(&quot;/test/**&quot;);</span>
+<span class="fc" id="L78">    }</span>
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
         // @formatter:off
-<span class="fc" id="L85">        http</span>
-<span class="fc" id="L86">            .csrf()</span>
-<span class="fc" id="L87">            .disable()</span>
-<span class="fc" id="L88">            .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)</span>
-<span class="fc" id="L89">            .exceptionHandling()</span>
-<span class="fc" id="L90">                .authenticationEntryPoint(problemSupport)</span>
-<span class="fc" id="L91">                .accessDeniedHandler(problemSupport)</span>
-<span class="fc" id="L92">            .and()</span>
-<span class="fc" id="L93">                .headers()</span>
-<span class="fc" id="L94">                .contentSecurityPolicy(contentSecurityPolicy)</span>
+<span class="fc" id="L83">        http</span>
+<span class="fc" id="L84">            .csrf()</span>
+<span class="fc" id="L85">            .disable()</span>
+<span class="fc" id="L86">            .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)</span>
+<span class="fc" id="L87">            .exceptionHandling()</span>
+<span class="fc" id="L88">                .authenticationEntryPoint(problemSupport)</span>
+<span class="fc" id="L89">                .accessDeniedHandler(problemSupport)</span>
+<span class="fc" id="L90">            .and()</span>
+<span class="fc" id="L91">                .headers()</span>
+<span class="fc" id="L92">                .contentSecurityPolicy(contentSecurityPolicy)</span>
+<span class="fc" id="L93">            .and()</span>
+<span class="fc" id="L94">                .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)</span>
 <span class="fc" id="L95">            .and()</span>
-<span class="fc" id="L96">                .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)</span>
+<span class="fc" id="L96">                .featurePolicy(featurePolicyHeaders)</span>
 <span class="fc" id="L97">            .and()</span>
-<span class="fc" id="L98">                .featurePolicy(featurePolicyHeaders)</span>
-<span class="fc" id="L99">            .and()</span>
-<span class="fc" id="L100">                .frameOptions()</span>
-<span class="fc" id="L101">                .deny()</span>
-<span class="fc" id="L102">            .and()</span>
-<span class="fc" id="L103">                .sessionManagement()</span>
-<span class="fc" id="L104">                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)</span>
-<span class="fc" id="L105">            .and()</span>
-<span class="fc" id="L106">                .authorizeRequests()</span>
-<span class="fc" id="L107">                .antMatchers(&quot;/api/authenticate&quot;).permitAll()</span>
-<span class="fc" id="L108">                .antMatchers(&quot;/api/register&quot;).permitAll()</span>
-<span class="fc" id="L109">                .antMatchers(&quot;/api/activate&quot;).permitAll()</span>
-<span class="fc" id="L110">                .antMatchers(&quot;/api/account/reset-password/init&quot;).permitAll()</span>
-<span class="fc" id="L111">                .antMatchers(&quot;/api/account/reset-password/finish&quot;).permitAll()</span>
-<span class="fc" id="L112">                .antMatchers(&quot;/api/admin/**&quot;).hasAuthority(AuthoritiesConstants.ADMIN)</span>
-<span class="fc" id="L113">                .antMatchers(&quot;/api/**&quot;).authenticated()</span>
-<span class="fc" id="L114">                .antMatchers(&quot;/actuator/health&quot;).permitAll()</span>
-<span class="fc" id="L115">                .antMatchers(&quot;/actuator/health/**&quot;).permitAll()</span>
-<span class="fc" id="L116">                .antMatchers(&quot;/actuator/info&quot;).permitAll()</span>
-<span class="fc" id="L117">                .antMatchers(&quot;/actuator/prometheus&quot;).permitAll()</span>
-<span class="fc" id="L118">                .antMatchers(&quot;/actuator/**&quot;).hasAuthority(AuthoritiesConstants.ADMIN)</span>
+<span class="fc" id="L98">                .frameOptions()</span>
+<span class="fc" id="L99">                .deny()</span>
+<span class="fc" id="L100">            .and()</span>
+<span class="fc" id="L101">                .sessionManagement()</span>
+<span class="fc" id="L102">                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)</span>
+<span class="fc" id="L103">            .and()</span>
+<span class="fc" id="L104">                .authorizeRequests()</span>
+<span class="fc" id="L105">                .antMatchers(&quot;/api/authenticate&quot;).permitAll()</span>
+<span class="fc" id="L106">                .antMatchers(&quot;/api/register&quot;).permitAll()</span>
+<span class="fc" id="L107">                .antMatchers(&quot;/api/activate&quot;).permitAll()</span>
+<span class="fc" id="L108">                .antMatchers(&quot;/api/account/reset-password/init&quot;).permitAll()</span>
+<span class="fc" id="L109">                .antMatchers(&quot;/api/account/reset-password/finish&quot;).permitAll()</span>
+<span class="fc" id="L110">                .antMatchers(&quot;/api/admin/**&quot;).hasAuthority(AuthoritiesConstants.ADMIN)</span>
+<span class="fc" id="L111">                .antMatchers(&quot;/api/**&quot;).authenticated()</span>
+<span class="fc" id="L112">                .antMatchers(&quot;/actuator/health&quot;).permitAll()</span>
+<span class="fc" id="L113">                .antMatchers(&quot;/actuator/health/**&quot;).permitAll()</span>
+<span class="fc" id="L114">                .antMatchers(&quot;/actuator/info&quot;).permitAll()</span>
+<span class="fc" id="L115">                .antMatchers(&quot;/actuator/prometheus&quot;).permitAll()</span>
+<span class="fc" id="L116">                .antMatchers(&quot;/actuator/**&quot;).hasAuthority(AuthoritiesConstants.ADMIN)</span>
+<span class="fc" id="L117">            .and()</span>
+<span class="fc" id="L118">                .httpBasic()</span>
 <span class="fc" id="L119">            .and()</span>
-<span class="fc" id="L120">                .httpBasic()</span>
-<span class="fc" id="L121">            .and()</span>
-<span class="fc" id="L122">                .apply(securityConfigurerAdapter());</span>
+<span class="fc" id="L120">                .apply(securityConfigurerAdapter());</span>
         // @formatter:on
-<span class="fc" id="L124">    }</span>
+<span class="fc" id="L122">    }</span>
 
     private JwtConfiguration securityConfigurerAdapter() {
-<span class="fc" id="L127">        return new JwtConfiguration(tokenProvider);</span>
+<span class="fc" id="L125">        return new JwtConfiguration(tokenProvider);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
