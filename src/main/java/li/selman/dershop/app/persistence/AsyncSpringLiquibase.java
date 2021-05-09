@@ -23,8 +23,7 @@ import java.sql.SQLException;
 import java.util.concurrent.Executor;
 import li.selman.dershop.app.ProfileConstants;
 import liquibase.exception.LiquibaseException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.liquibase.DataSourceClosingSpringLiquibase;
 import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
@@ -40,6 +39,7 @@ import org.springframework.util.StopWatch;
  * time: <ul> <li>On a recent MacBook Pro, start-up time is down from 14 seconds to 8 seconds</li> <li>In production,
  * this can help your application run on platforms like Heroku, where it must start/restart very quickly</li> </ul>
  */
+@Slf4j
 public class AsyncSpringLiquibase extends DataSourceClosingSpringLiquibase {
 
     /** Constant <code>DISABLED_MESSAGE="Liquibase is disabled"</code> */
@@ -59,9 +59,6 @@ public class AsyncSpringLiquibase extends DataSourceClosingSpringLiquibase {
     public static final long SLOWNESS_THRESHOLD = 5; // seconds
     /** Constant <code>SLOWNESS_MESSAGE="Warning, Liquibase took more than {} se"{trunked}</code> */
     public static final String SLOWNESS_MESSAGE = "Warning, Liquibase took more than {} seconds to start up!";
-
-    // named "logger" because there is already a field called "log" in "SpringLiquibase"
-    private final Logger logger = LoggerFactory.getLogger(AsyncSpringLiquibase.class);
 
     private final Executor executor;
 
@@ -88,21 +85,21 @@ public class AsyncSpringLiquibase extends DataSourceClosingSpringLiquibase {
                 try (Connection connection = getDataSource().getConnection()) {
                     executor.execute(() -> {
                         try {
-                            logger.warn(STARTING_ASYNC_MESSAGE);
+                            log.warn(STARTING_ASYNC_MESSAGE);
                             initDb();
                         } catch (LiquibaseException e) {
-                            logger.error(EXCEPTION_MESSAGE, e.getMessage(), e);
+                            log.error(EXCEPTION_MESSAGE, e.getMessage(), e);
                         }
                     });
                 } catch (SQLException e) {
-                    logger.error(EXCEPTION_MESSAGE, e.getMessage(), e);
+                    log.error(EXCEPTION_MESSAGE, e.getMessage(), e);
                 }
             } else {
-                logger.debug(STARTING_SYNC_MESSAGE);
+                log.debug(STARTING_SYNC_MESSAGE);
                 initDb();
             }
         } else {
-            logger.debug(DISABLED_MESSAGE);
+            log.debug(DISABLED_MESSAGE);
         }
     }
 
@@ -116,9 +113,9 @@ public class AsyncSpringLiquibase extends DataSourceClosingSpringLiquibase {
         watch.start();
         super.afterPropertiesSet();
         watch.stop();
-        logger.debug(STARTED_MESSAGE, watch.getTotalTimeMillis());
+        log.debug(STARTED_MESSAGE, watch.getTotalTimeMillis());
         if (watch.getTotalTimeMillis() > SLOWNESS_THRESHOLD * 1000L) {
-            logger.warn(SLOWNESS_MESSAGE, SLOWNESS_THRESHOLD);
+            log.warn(SLOWNESS_MESSAGE, SLOWNESS_THRESHOLD);
         }
     }
 }

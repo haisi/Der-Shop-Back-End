@@ -20,9 +20,8 @@ import java.util.concurrent.Executor;
 import javax.sql.DataSource;
 import li.selman.dershop.app.ProfileConstants;
 import liquibase.integration.spring.SpringLiquibase;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -34,9 +33,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 
 @Configuration
+@Slf4j
 public class LiquibaseConfiguration {
-
-    private static final Logger log = LoggerFactory.getLogger(LiquibaseConfiguration.class);
 
     private final Environment env;
 

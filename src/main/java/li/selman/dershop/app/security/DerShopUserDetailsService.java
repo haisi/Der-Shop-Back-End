@@ -22,9 +22,8 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 import li.selman.dershop.user.DerShopUser;
 import li.selman.dershop.user.UserRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -35,9 +34,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 @Component
+@Slf4j
 public class DerShopUserDetailsService implements UserDetailsService {
-
-    private static final Logger log = LoggerFactory.getLogger(DerShopUserDetailsService.class);
 
     private final UserRepository userRepository;
 

@@ -13,21 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package li.selman.dershop;
 
-import li.selman.dershop.app.security.jwt.JwtProperties;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import li.selman.dershop.product.ProductRepository;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.event.EventListener;
+import org.springframework.stereotype.Component;
 
-@SuppressWarnings("checkstyle:HideUtilityClassConstructor")
-@SpringBootApplication
-@EnableConfigurationProperties({ LiquibaseProperties.class, JwtProperties.class })
-public class DerShopApplication {
+@Component
+@Profile("dev")
+@AllArgsConstructor
+@Slf4j
+public class OnStartDev {
 
-    public static void main(String[] args) {
-        SpringApplication.run(DerShopApplication.class, args);
+    private final ProductRepository productRepo;
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void run() {
+        productRepo.findAll()
+            .forEach(it -> log.info("{}", it));
     }
-
 }
