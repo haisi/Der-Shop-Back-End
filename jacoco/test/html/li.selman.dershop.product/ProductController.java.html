@@ -15,6 +15,12 @@
  */
 package li.selman.dershop.product;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.ExposesResourceFor;
@@ -34,21 +40,29 @@ public class ProductController {
 
     private final ProductRepository productRepo;
 
-<span class="fc" id="L37">    ProductController(ProductRepository productRepo) {</span>
-<span class="fc" id="L38">        this.productRepo = productRepo;</span>
-<span class="fc" id="L39">    }</span>
+<span class="fc" id="L43">    ProductController(ProductRepository productRepo) {</span>
+<span class="fc" id="L44">        this.productRepo = productRepo;</span>
+<span class="fc" id="L45">    }</span>
 
     @GetMapping
-    CollectionModel&lt;Product&gt; findAll() {
-<span class="fc" id="L43">        return CollectionModel.of(productRepo.findAll());</span>
+    ResponseEntity&lt;CollectionModel&lt;EntityModel&lt;Product&gt;&gt;&gt; findAll() {
+<span class="fc" id="L49">        List&lt;EntityModel&lt;Product&gt;&gt; products = StreamSupport.stream(productRepo.findAll().spliterator(), false)</span>
+<span class="fc" id="L50">            .map(product -&gt; EntityModel.of(product,</span>
+<span class="fc" id="L51">                linkTo(methodOn(ProductController.class).findById(product.getId())).withSelfRel(),</span>
+<span class="fc" id="L52">                linkTo(methodOn(ProductController.class).findAll()).withRel(&quot;products&quot;)))</span>
+<span class="fc" id="L53">            .collect(Collectors.toList());</span>
+
+<span class="fc" id="L55">        return ResponseEntity.ok(</span>
+<span class="fc" id="L56">            CollectionModel.of(products,</span>
+<span class="fc" id="L57">                linkTo(methodOn(ProductController.class).findAll()).withSelfRel()));</span>
     }
 
     @GetMapping(&quot;{id}&quot;)
-    ResponseEntity&lt;?&gt; findById(@PathVariable(&quot;id&quot;) Long id) {
-<span class="nc" id="L48">        return productRepo.findById(id)</span>
-<span class="nc" id="L49">                          .map(EntityModel::of)</span>
-<span class="nc" id="L50">                          .map(ResponseEntity::ok)</span>
-<span class="nc" id="L51">                          .orElse(ResponseEntity.notFound().build());</span>
+    ResponseEntity&lt;EntityModel&lt;Product&gt;&gt; findById(@PathVariable(&quot;id&quot;) Long id) {
+<span class="nc" id="L62">        return productRepo.findById(id)</span>
+<span class="nc" id="L63">            .map(EntityModel::of)</span>
+<span class="nc" id="L64">            .map(ResponseEntity::ok)</span>
+<span class="nc" id="L65">            .orElse(ResponseEntity.notFound().build());</span>
     }
 
 }

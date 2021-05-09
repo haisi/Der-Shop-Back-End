@@ -33,18 +33,18 @@ import org.springframework.stereotype.Component;
 
     @Override
     public @NotNull EntityModel&lt;Product&gt; process(EntityModel&lt;Product&gt; resource) {
-<span class="nc bnc" id="L36" title="All 2 branches missed.">        if (resource.getContent() == null) {</span>
+<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        if (resource.getContent() == null) {</span>
 <span class="nc" id="L37">            return resource;</span>
         }
 
-<span class="nc" id="L40">        resource.add(Link.of(geProductImageUrl(resource.getContent()), IMAGE_REL));</span>
-<span class="nc" id="L41">        return resource;</span>
+<span class="fc" id="L40">        resource.add(Link.of(geProductImageUrl(resource.getContent()), IMAGE_REL));</span>
+<span class="fc" id="L41">        return resource;</span>
     }
 
     String geProductImageUrl(Product product) {
-<span class="nc" id="L45">        UriTemplate template = UriTemplate.of(&quot;http:www.s3.amazon.com/product-image/{id}&quot;);</span>
-<span class="nc" id="L46">        var uriVariables = Map.entry(&quot;id&quot;, product.getId().toString());</span>
-<span class="nc" id="L47">        return template.expand(uriVariables).toString();</span>
+<span class="fc" id="L45">        UriTemplate template = UriTemplate.of(&quot;http://www-dershop-com.cloudinary.com/product-image/{id}&quot;);</span>
+<span class="fc" id="L46">        Map&lt;String, String&gt; uriVariables = Map.of(&quot;id&quot;, product.getId().toString());</span>
+<span class="fc" id="L47">        return template.expand(uriVariables).toString();</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

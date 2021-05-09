@@ -20,9 +20,8 @@ import java.util.concurrent.Executor;
 import javax.sql.DataSource;
 import li.selman.dershop.app.ProfileConstants;
 import liquibase.integration.spring.SpringLiquibase;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -34,15 +33,14 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.env.Profiles;
 
 @Configuration
+<span class="fc" id="L36">@Slf4j</span>
 public class LiquibaseConfiguration {
-
-<span class="fc" id="L39">    private static final Logger log = LoggerFactory.getLogger(LiquibaseConfiguration.class);</span>
 
     private final Environment env;
 
-<span class="fc" id="L43">    public LiquibaseConfiguration(Environment env) {</span>
-<span class="fc" id="L44">        this.env = env;</span>
-<span class="fc" id="L45">    }</span>
+<span class="fc" id="L41">    public LiquibaseConfiguration(Environment env) {</span>
+<span class="fc" id="L42">        this.env = env;</span>
+<span class="fc" id="L43">    }</span>
 
     @Bean
     public SpringLiquibase liquibase(
@@ -58,32 +56,32 @@ public class LiquibaseConfiguration {
 //            dataSource,
 //            dataSourceProperties);
 
-<span class="fc" id="L61">        SpringLiquibase liquibase = createAsyncSpringLiquibaseConfig(executor,</span>
+<span class="fc" id="L59">        SpringLiquibase liquibase = createAsyncSpringLiquibaseConfig(executor,</span>
             liquibaseDataSource,
             liquibaseProperties,
             dataSource,
             dataSourceProperties);
 
-<span class="fc" id="L67">        liquibase.setChangeLog(&quot;classpath:liquibase/master.xml&quot;);</span>
-<span class="fc" id="L68">        liquibase.setContexts(liquibaseProperties.getContexts());</span>
-<span class="fc" id="L69">        liquibase.setDefaultSchema(liquibaseProperties.getDefaultSchema());</span>
-<span class="fc" id="L70">        liquibase.setLiquibaseSchema(liquibaseProperties.getLiquibaseSchema());</span>
-<span class="fc" id="L71">        liquibase.setLiquibaseTablespace(liquibaseProperties.getLiquibaseTablespace());</span>
-<span class="fc" id="L72">        liquibase.setDatabaseChangeLogLockTable(liquibaseProperties.getDatabaseChangeLogLockTable());</span>
-<span class="fc" id="L73">        liquibase.setDatabaseChangeLogTable(liquibaseProperties.getDatabaseChangeLogTable());</span>
-<span class="fc" id="L74">        liquibase.setDropFirst(liquibaseProperties.isDropFirst());</span>
-<span class="fc" id="L75">        liquibase.setLabels(liquibaseProperties.getLabels());</span>
-<span class="fc" id="L76">        liquibase.setChangeLogParameters(liquibaseProperties.getParameters());</span>
-<span class="fc" id="L77">        liquibase.setRollbackFile(liquibaseProperties.getRollbackFile());</span>
-<span class="fc" id="L78">        liquibase.setTestRollbackOnUpdate(liquibaseProperties.isTestRollbackOnUpdate());</span>
-<span class="pc bpc" id="L79" title="1 of 2 branches missed.">        if (env.acceptsProfiles(Profiles.of(ProfileConstants.NO_LIQUIBASE))) {</span>
-<span class="nc" id="L80">            log.debug(&quot;Skipped Liquibase&quot;);</span>
-<span class="nc" id="L81">            liquibase.setShouldRun(false);</span>
+<span class="fc" id="L65">        liquibase.setChangeLog(&quot;classpath:liquibase/master.xml&quot;);</span>
+<span class="fc" id="L66">        liquibase.setContexts(liquibaseProperties.getContexts());</span>
+<span class="fc" id="L67">        liquibase.setDefaultSchema(liquibaseProperties.getDefaultSchema());</span>
+<span class="fc" id="L68">        liquibase.setLiquibaseSchema(liquibaseProperties.getLiquibaseSchema());</span>
+<span class="fc" id="L69">        liquibase.setLiquibaseTablespace(liquibaseProperties.getLiquibaseTablespace());</span>
+<span class="fc" id="L70">        liquibase.setDatabaseChangeLogLockTable(liquibaseProperties.getDatabaseChangeLogLockTable());</span>
+<span class="fc" id="L71">        liquibase.setDatabaseChangeLogTable(liquibaseProperties.getDatabaseChangeLogTable());</span>
+<span class="fc" id="L72">        liquibase.setDropFirst(liquibaseProperties.isDropFirst());</span>
+<span class="fc" id="L73">        liquibase.setLabels(liquibaseProperties.getLabels());</span>
+<span class="fc" id="L74">        liquibase.setChangeLogParameters(liquibaseProperties.getParameters());</span>
+<span class="fc" id="L75">        liquibase.setRollbackFile(liquibaseProperties.getRollbackFile());</span>
+<span class="fc" id="L76">        liquibase.setTestRollbackOnUpdate(liquibaseProperties.isTestRollbackOnUpdate());</span>
+<span class="pc bpc" id="L77" title="1 of 2 branches missed.">        if (env.acceptsProfiles(Profiles.of(ProfileConstants.NO_LIQUIBASE))) {</span>
+<span class="nc" id="L78">            log.debug(&quot;Skipped Liquibase&quot;);</span>
+<span class="nc" id="L79">            liquibase.setShouldRun(false);</span>
         } else {
-<span class="fc" id="L83">            liquibase.setShouldRun(liquibaseProperties.isEnabled());</span>
-<span class="fc" id="L84">            log.debug(&quot;Configuring Liquibase&quot;);</span>
+<span class="fc" id="L81">            liquibase.setShouldRun(liquibaseProperties.isEnabled());</span>
+<span class="fc" id="L82">            log.debug(&quot;Configuring Liquibase&quot;);</span>
         }
-<span class="fc" id="L86">        return liquibase;</span>
+<span class="fc" id="L84">        return liquibase;</span>
     }
 
     @NotNull
@@ -92,12 +90,12 @@ public class LiquibaseConfiguration {
                                                                   LiquibaseProperties liquibaseProperties,
                                                                   ObjectProvider&lt;DataSource&gt; dataSource,
                                                                   DataSourceProperties dataSourceProperties) {
-<span class="fc" id="L95">        return SpringLiquibaseUtil.createAsyncSpringLiquibase(</span>
+<span class="fc" id="L93">        return SpringLiquibaseUtil.createAsyncSpringLiquibase(</span>
             this.env,
             executor,
-<span class="fc" id="L98">            liquibaseDataSource.getIfAvailable(),</span>
+<span class="fc" id="L96">            liquibaseDataSource.getIfAvailable(),</span>
             liquibaseProperties,
-<span class="fc" id="L100">            dataSource.getIfUnique(),</span>
+<span class="fc" id="L98">            dataSource.getIfUnique(),</span>
             dataSourceProperties
         );
     }
@@ -108,10 +106,10 @@ public class LiquibaseConfiguration {
                                                                    LiquibaseProperties liquibaseProperties,
                                                                    ObjectProvider&lt;DataSource&gt; dataSource,
                                                                    DataSourceProperties dataSourceProperties) {
-<span class="nc" id="L111">        return SpringLiquibaseUtil.createSpringLiquibase(</span>
-<span class="nc" id="L112">            liquibaseDataSource.getIfAvailable(),</span>
+<span class="nc" id="L109">        return SpringLiquibaseUtil.createSpringLiquibase(</span>
+<span class="nc" id="L110">            liquibaseDataSource.getIfAvailable(),</span>
             liquibaseProperties,
-<span class="nc" id="L114">            dataSource.getIfUnique(),</span>
+<span class="nc" id="L112">            dataSource.getIfUnique(),</span>
             dataSourceProperties);
     }
 }

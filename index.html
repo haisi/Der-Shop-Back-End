@@ -582,6 +582,21 @@ Accept: application/hal+json</code></pre>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">The name of the product</p></td>
 </tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>_embedded.products[]._links.self</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Links to the entity itself</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>_embedded.products[]._links.products</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Links to all available products</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>_embedded.products[]._links.image</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Links to the articles image</p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -593,14 +608,52 @@ Accept: application/hal+json</code></pre>
   "_embedded" : {
     "products" : [ {
       "id" : 1,
-      "name" : "Product A"
+      "name" : "Product A",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/products/1"
+        },
+        "products" : {
+          "href" : "http://localhost:8080/api/products"
+        },
+        "image" : {
+          "href" : "http://www-dershop-com.cloudinary.com/product-image/1"
+        }
+      }
     }, {
       "id" : 2,
-      "name" : "Product B"
+      "name" : "Product B",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/products/2"
+        },
+        "products" : {
+          "href" : "http://localhost:8080/api/products"
+        },
+        "image" : {
+          "href" : "http://www-dershop-com.cloudinary.com/product-image/2"
+        }
+      }
     }, {
       "id" : 3,
-      "name" : "Product C"
+      "name" : "Product C",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/products/3"
+        },
+        "products" : {
+          "href" : "http://localhost:8080/api/products"
+        },
+        "image" : {
+          "href" : "http://www-dershop-com.cloudinary.com/product-image/3"
+        }
+      }
     } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/api/products"
+    }
   }
 }</code></pre>
 </div>
@@ -651,7 +704,7 @@ Accept: application/hal+json</code></pre>
 <div id="footer">
 <div id="footer-text">
 Version 1.0<br>
-Last updated 2021-05-08 21:38:19 UTC
+Last updated 2021-05-09 20:50:05 UTC
 </div>
 </div>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/github.min.css">

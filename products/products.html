@@ -470,14 +470,52 @@ Content-Type: application/hal+json
   "_embedded" : {
     "products" : [ {
       "id" : 1,
-      "name" : "Product A"
+      "name" : "Product A",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/products/1"
+        },
+        "products" : {
+          "href" : "http://localhost:8080/api/products"
+        },
+        "image" : {
+          "href" : "http://www-dershop-com.cloudinary.com/product-image/1"
+        }
+      }
     }, {
       "id" : 2,
-      "name" : "Product B"
+      "name" : "Product B",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/products/2"
+        },
+        "products" : {
+          "href" : "http://localhost:8080/api/products"
+        },
+        "image" : {
+          "href" : "http://www-dershop-com.cloudinary.com/product-image/2"
+        }
+      }
     }, {
       "id" : 3,
-      "name" : "Product C"
+      "name" : "Product C",
+      "_links" : {
+        "self" : {
+          "href" : "http://localhost:8080/api/products/3"
+        },
+        "products" : {
+          "href" : "http://localhost:8080/api/products"
+        },
+        "image" : {
+          "href" : "http://www-dershop-com.cloudinary.com/product-image/3"
+        }
+      }
     } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://localhost:8080/api/products"
+    }
   }
 }</code></pre>
 </div>
@@ -488,7 +526,7 @@ Content-Type: application/hal+json
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1-SNAPSHOT<br>
-Last updated 2021-05-08 21:38:19 UTC
+Last updated 2021-05-09 20:50:05 UTC
 </div>
 </div>
 </body>
