@@ -42,8 +42,8 @@ public class ProductResourceProcessor implements RepresentationModelProcessor<En
     }
 
     String geProductImageUrl(Product product) {
-        UriTemplate template = UriTemplate.of("http:www.s3.amazon.com/product-image/{id}");
-        var uriVariables = Map.entry("id", product.getId().toString());
+        UriTemplate template = UriTemplate.of("http://www-dershop-com.cloudinary.com/product-image/{id}");
+        Map<String, String> uriVariables = Map.of("id", product.getId().toString());
         return template.expand(uriVariables).toString();
     }
 }

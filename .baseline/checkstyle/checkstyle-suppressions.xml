@@ -10,6 +10,7 @@
     <suppress files="[/\\]src[/\\].*[/\\](java|groovy)[/\\]" checks="EqualsGetClass" />
     <suppress files="[/\\]src[/\\].*[/\\](java|groovy)[/\\]" checks="BracesRequired" />
     <suppress files="[/\\]src[/\\].*[/\\](java|groovy)[/\\]" checks="MissingSummary" />
+    <suppress files="[/\\]src[/\\].*[/\\](java|groovy)[/\\]" checks="AvoidStaticImportCheck" />
     <!-- Suppress test classes -->
     <suppress files="[/\\]src[/\\].*[Tt]est[/\\](java|groovy)[/\\]" checks="Javadoc*" />
     <suppress files="[/\\]src[/\\].*[Tt]est[/\\](java|groovy)[/\\]" checks="VariableDeclarationUsageDistance" />

@@ -15,6 +15,12 @@
  */
 package li.selman.dershop.product;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.ExposesResourceFor;
@@ -39,16 +45,24 @@ public class ProductController {
     }
 
     @GetMapping
-    CollectionModel<Product> findAll() {
-        return CollectionModel.of(productRepo.findAll());
+    ResponseEntity<CollectionModel<EntityModel<Product>>> findAll() {
+        List<EntityModel<Product>> products = StreamSupport.stream(productRepo.findAll().spliterator(), false)
+            .map(product -> EntityModel.of(product,
+                linkTo(methodOn(ProductController.class).findById(product.getId())).withSelfRel(),
+                linkTo(methodOn(ProductController.class).findAll()).withRel("products")))
+            .collect(Collectors.toList());
+
+        return ResponseEntity.ok(
+            CollectionModel.of(products,
+                linkTo(methodOn(ProductController.class).findAll()).withSelfRel()));
     }
 
     @GetMapping("{id}")
-    ResponseEntity<?> findById(@PathVariable("id") Long id) {
+    ResponseEntity<EntityModel<Product>> findById(@PathVariable("id") Long id) {
         return productRepo.findById(id)
-                          .map(EntityModel::of)
-                          .map(ResponseEntity::ok)
-                          .orElse(ResponseEntity.notFound().build());
+            .map(EntityModel::of)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
 
 }

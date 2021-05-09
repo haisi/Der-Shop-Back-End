@@ -102,13 +102,29 @@ class ProductControllerTest {
 
     private FieldDescriptor[] getProductFieldDescriptor() {
         return new FieldDescriptor[]{
-//            subsectionWithPath("_embedded").ignored(),
+            fieldWithPath("_links").ignored(),
+            fieldWithPath("_links.self").ignored(),
+            fieldWithPath("_links.self.href").ignored(),
             fieldWithPath("_embedded").ignored(),
             fieldWithPath("_embedded.products").ignored(),
             fieldWithPath("_embedded.products[].id")
                 .description("The unique id of the product entity").type(Long.class.getSimpleName()),
             fieldWithPath("_embedded.products[].name")
-                .description("The name of the product").type(String.class.getSimpleName())
+                .description("The name of the product").type(String.class.getSimpleName()),
+
+            fieldWithPath("_embedded.products[]._links").ignored(),
+
+            fieldWithPath("_embedded.products[]._links.self")
+                .description("Links to the entity itself").type(String.class.getSimpleName()),
+            fieldWithPath("_embedded.products[]._links.self.href").ignored(),
+
+            fieldWithPath("_embedded.products[]._links.products")
+                .description("Links to all available products").type(String.class.getSimpleName()),
+            fieldWithPath("_embedded.products[]._links.products.href").ignored(),
+
+            fieldWithPath("_embedded.products[]._links.image")
+                .description("Links to the articles image").type(String.class.getSimpleName()),
+            fieldWithPath("_embedded.products[]._links.image.href").ignored(),
         };
     }
 }
